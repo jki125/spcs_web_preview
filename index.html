@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣禪宗文化教育協會 - 弘揚禪宗法脈．普及禪修教育 | 概念原型</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        npo: {
+                            primary: '#8D7B68',    // 沉穩檀木香色：象徵禪意、定力與傳承
+                            secondary: '#C19A6B',  // 溫潤沙金色：象徵智慧、光明與覺性
+                            dark: '#2C3639',       // 深石磐灰：用於重要文字，象徵穩重如磐石
+                            light: '#F9F5F6',      // 柔白宣紙色：乾淨、沉靜的視覺背景
+                            accent: '#5C8374'      // 翠竹深綠色：象徵自然、生機與和諧
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icon CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .child-card-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-npo-light text-npo-dark font-sans leading-normal tracking-normal overflow-x-hidden">
+
+    <!-- 頂部公告與輔助導覽 -->
+    <div class="bg-npo-dark text-white text-xs py-2 px-4 flex justify-between items-center">
+        <div class="hidden md:flex items-center space-x-4">
+            <span><i class="fa-solid fa-phone mr-1"></i> (02) 2345-6789</span>
+            <span><i class="fa-solid fa-envelope mr-1"></i> info@zen-culture.org.tw</span>
+        </div>
+        <div class="flex items-center space-x-4 w-full md:w-auto justify-between md:justify-end">
+            <span class="bg-npo-secondary text-white font-bold px-2 py-0.5 rounded text-[10px] animate-pulse">公益護持</span>
+            <span class="text-gray-300">偏鄉國小兒童禪心夏令營，急需您的助緣支持！</span>
+            <a href="#impact-calculator" class="underline hover:text-npo-secondary">了解更多</a>
+        </div>
+    </div>
+
+    <!-- 主導覽列 -->
+    <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-sm z-40 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-npo-primary rounded-full flex items-center justify-center text-white font-black text-xl shadow-md">
+                    <i class="fa-solid fa-spa"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold text-npo-dark tracking-wider block">Zen Culture</span>
+                    <span class="text-xs font-semibold text-npo-primary tracking-widest block -mt-1">台灣禪宗文化教育協會</span>
+                </div>
+            </a>
+
+            <!-- 桌上型選單 -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">關於協會</a>
+                <a href="#projects" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">推廣項目</a>
+                <a href="#sponsor-child" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">護持計畫</a>
+                <a href="#impact-calculator" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">護持計算機</a>
+                <a href="#news" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">活動快訊</a>
+                <a href="#transparency" class="text-gray-600 hover:text-npo-primary font-medium transition-colors">財務公開</a>
+            </div>
+
+            <!-- 右側行動按鈕 -->
+            <div class="hidden lg:flex items-center space-x-4">
+                <button onclick="openDonationModal('regular')" class="border-2 border-npo-primary text-npo-primary hover:bg-npo-primary hover:text-white font-bold px-5 py-2 rounded-full transition-all duration-300">
+                    定期護持
+                </button>
+                <button onclick="openDonationModal('one-time')" class="bg-npo-secondary hover:bg-amber-600 text-white font-bold px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    隨喜護持 <i class="fa-solid fa-heart ml-1"></i>
+                </button>
+            </div>
+
+            <!-- 手機版選單按鈕 -->
+            <div class="lg:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-npo-dark hover:text-npo-primary p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 手機版展開選單 -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 py-4 px-6 space-y-4 shadow-inner">
+            <a href="#about" class="block text-gray-700 hover:text-npo-primary font-medium py-1">關於協會</a>
+            <a href="#projects" class="block text-gray-700 hover:text-npo-primary font-medium py-1">推廣項目</a>
+            <a href="#sponsor-child" class="block text-gray-700 hover:text-npo-primary font-medium py-1">護持計畫</a>
+            <a href="#impact-calculator" class="block text-gray-700 hover:text-npo-primary font-medium py-1">護持計算機</a>
+            <a href="#news" class="block text-gray-700 hover:text-npo-primary font-medium py-1">活動快訊</a>
+            <div class="pt-4 border-t border-gray-100 flex flex-col space-y-3">
+                <button onclick="openDonationModal('regular')" class="w-full text-center border-2 border-npo-primary text-npo-primary py-2.5 rounded-full font-bold">定期護持</button>
+                <button onclick="openDonationModal('one-time')" class="w-full text-center bg-npo-secondary text-white py-2.5 rounded-full font-bold shadow">隨喜護持</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主頁英雄視覺 (Hero Section) -->
+    <section class="relative bg-npo-dark min-h-[85vh] flex items-center overflow-hidden">
+        <!-- 背景背景圖 -->
+        <div class="absolute inset-0 opacity-40 z-0">
+            <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=2070&auto=format&fit=crop" alt="禪修靜坐竹林" class="w-full h-full object-cover">
+        </div>
+        <!-- 漸層遮罩 -->
+        <div class="absolute inset-0 bg-gradient-to-r from-npo-dark via-npo-dark/80 to-transparent z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- 左側文案 -->
+                <div class="lg:col-span-7 space-y-6 text-white text-left">
+                    <span class="bg-npo-primary/20 border border-npo-primary text-npo-secondary font-bold text-sm px-4 py-1.5 rounded-full inline-block">
+                        <i class="fa-solid fa-dharmachakra mr-1"></i> 明心見性．禪修教育推廣
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                        靜心觀照，<br>找回內心最初的安定力量。
+                    </h1>
+                    <p class="text-lg text-gray-300 max-w-xl">
+                        台灣禪宗文化教育協會致力於將正統禪修、靜慮呼吸與定力培育帶入現代生活與各級校園。我們誠摯邀請您攜手護持，共同為社會點亮心靈的智慧之光。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <a href="#sponsor-child" class="bg-npo-primary hover:bg-amber-800 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+                            護持心靈教育項目 <i class="fa-solid fa-chevron-right ml-2 text-sm"></i>
+                        </a>
+                        <button onclick="openDonationModal('one-time')" class="bg-white/10 hover:bg-white/20 text-white border-2 border-white/40 font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 flex items-center justify-center">
+                            隨喜支持本會運作 <i class="fa-solid fa-heart text-npo-secondary ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 右側即時數據看板 -->
+                <div class="lg:col-span-5 bg-white rounded-3xl p-8 shadow-2xl relative border border-gray-100">
+                    <div class="absolute -top-4 -right-4 bg-npo-secondary text-white font-extrabold text-xs px-4 py-2 rounded-full shadow">
+                        重點助緣計畫
+                    </div>
+                    <h3 class="text-2xl font-black text-npo-dark mb-4">
+                        與大眾共結禪緣
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-6">我們在全國社區與偏鄉學校推動靜心，已協助多位學童及成人提升專注力與緩解焦慮。您的每一分支持，都是推動心靈翻轉的種子。</p>
+                    
+                    <div class="space-y-4">
+                        <!-- 計畫 1 -->
+                        <div class="flex items-center space-x-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-npo-primary flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-sm font-bold text-npo-dark">
+                                    <span>正統禪修經典與助印</span>
+                                    <span>72% 達標</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-npo-primary h-full rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 計畫 2 -->
+                        <div class="flex items-center space-x-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-npo-accent flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-child-reaching"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-sm font-bold text-npo-dark">
+                                    <span>偏鄉國小兒童心靈營隊</span>
+                                    <span>48% 達標</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-npo-accent h-full rounded-full" style="width: 48%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 計畫 3 -->
+                        <div class="flex items-center space-x-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 text-npo-secondary flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-house-chimney-window"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between text-sm font-bold text-npo-dark">
+                                    <span>禪文化教育中心籌建</span>
+                                    <span>89% 達標</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full mt-2 overflow-hidden">
+                                    <div class="bg-npo-secondary h-full rounded-full" style="width: 89%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 影響力與三大支柱 -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-npo-primary font-bold tracking-widest uppercase text-sm block">OUR MISSION</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-npo-dark">三大核心心靈教育推廣體系</h2>
+                <div class="w-16 h-1 bg-npo-primary mx-auto rounded-full"></div>
+                <p class="text-gray-500 text-lg">我們的推廣不只是理論講授，更提倡融入日常、行住坐臥皆能實踐的「生活禪」，使心靈澄淨。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 支柱 1 -->
+                <div class="p-8 rounded-3xl bg-npo-light hover:bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 text-left group">
+                    <div class="w-14 h-14 bg-amber-100 text-npo-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-npo-dark mb-4">校園靜心與兒少輔導</h3>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        推動兒童與青少年禪心養成，透過呼吸調節、經絡疏通與專注力培訓，有效改善校園學童情緒波動，協助重構健康的身心節奏。
+                    </p>
+                    <a href="#projects" class="text-npo-primary font-bold inline-flex items-center hover:text-amber-700">
+                        了解推廣計畫 <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- 支柱 2 -->
+                <div class="p-8 rounded-3xl bg-npo-light hover:bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 text-left group">
+                    <div class="w-14 h-14 bg-emerald-100 text-npo-accent rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-npo-dark mb-4">經典助印與文化傳播</h3>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        致力編撰易懂、貼近現代生活的禪宗書籍與影音教材，持續助印經典免費結緣，並利用數位平台傳遞「定慧雙修」的正知正見。
+                    </p>
+                    <a href="#projects" class="text-npo-accent font-bold inline-flex items-center hover:text-emerald-700">
+                        了解推廣計畫 <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- 支柱 3 -->
+                <div class="p-8 rounded-3xl bg-npo-light hover:bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 text-left group">
+                    <div class="w-14 h-14 bg-orange-100 text-npo-secondary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-users-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-npo-dark mb-4">社會公益與社區推廣</h3>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        開辦社區銀髮、高壓上班族之免費禪心一日體驗，將正念、茶禪帶入鄰里，協助現代大眾減輕心理負擔，建立安定互助的鄰里關係。
+                    </p>
+                    <a href="#projects" class="text-npo-secondary font-bold inline-flex items-center hover:text-amber-600">
+                        了解推廣計畫 <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實時互動元件一：護持項目篩選與認助 (Interactive Project Finder) -->
+    <section id="sponsor-child" class="py-24 bg-npo-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16 space-y-4">
+                <span class="text-npo-secondary font-bold tracking-widest uppercase text-sm block">MEDITATION PROJECTS</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-npo-dark">認同與護持，讓社會多一分智慧與安定</h2>
+                <div class="w-16 h-1 bg-npo-secondary mx-auto rounded-full"></div>
+                <p class="text-gray-500">透過定期或單筆的點滴護持，讓心靈教育扎根。每一筆隨喜皆能廣結善緣、推動社會清流。</p>
+            </div>
+
+            <!-- 控制面板 (Filter UI) -->
+            <div class="bg-white rounded-3xl shadow-xl p-6 mb-12 border border-gray-100">
+                <div class="flex flex-wrap items-center justify-between gap-6">
+                    <!-- 項目類別過濾 -->
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-sm font-bold text-gray-700 mb-2"><i class="fa-solid fa-filter mr-1"></i> 推廣項目類別</label>
+                        <select id="filter-region" onchange="filterChildren()" class="w-full bg-npo-light border border-gray-200 text-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-npo-primary transition-all font-semibold">
+                            <option value="all">顯示所有類別 (All Projects)</option>
+                            <option value="asia">學童心靈與偏鄉教育</option>
+                            <option value="africa">成人減壓與社區樂活</option>
+                            <option value="latin">禪學經典與文化出版</option>
+                        </select>
+                    </div>
+
+                    <!-- 項目型態過濾 -->
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-sm font-bold text-gray-700 mb-2"><i class="fa-solid fa-clock mr-1"></i> 項目推廣時程</label>
+                        <select id="filter-age" onchange="filterChildren()" class="w-full bg-npo-light border border-gray-200 text-gray-700 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-npo-primary transition-all font-semibold">
+                            <option value="all">顯示所有項目型態</option>
+                            <option value="young">短期體驗 / 經典助印</option>
+                            <option value="school">中期營隊 / 主題工作坊</option>
+                            <option value="teen">長期深耕 / 師資培訓</option>
+                        </select>
+                    </div>
+
+                    <!-- 急迫性過濾 -->
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="block text-sm font-bold text-gray-700 mb-2"><i class="fa-solid fa-circle-exclamation mr-1"></i> 護持狀態需求</label>
+                        <div class="flex bg-npo-light p-1 rounded-2xl border border-gray-200">
+                            <button onclick="setGenderFilter('all')" id="gender-all" class="flex-1 text-center py-2 rounded-xl text-sm font-bold bg-white text-npo-primary shadow-sm transition-all">全部</button>
+                            <button onclick="setGenderFilter('boy')" id="gender-boy" class="flex-1 text-center py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-npo-dark transition-all">急需支持</button>
+                            <button onclick="setGenderFilter('girl')" id="gender-girl" class="flex-1 text-center py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-npo-dark transition-all">常態運作</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 項目卡片 Grid 容器 -->
+            <div id="children-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- JavaScript 會動態在此填入內容 -->
+            </div>
+
+            <!-- 無資料提示 (Hidden by default) -->
+            <div id="no-children-alert" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-gray-300">
+                <div class="text-5xl text-gray-300 mb-4"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                <h3 class="text-xl font-bold text-npo-dark mb-2">未找到符合您篩選條件的推廣項目</h3>
+                <p class="text-gray-500">試著放寬篩選範圍，或直接隨喜護持本會推廣總體基金！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實時互動元件二：護持影響力計算機 (Interactive Impact Calculator) -->
+    <section id="impact-calculator" class="py-24 bg-white relative overflow-hidden">
+        <!-- 裝飾用圖案 -->
+        <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-npo-primary/5 rounded-full blur-3xl z-0"></div>
+        <div class="absolute -left-32 -top-32 w-96 h-96 bg-npo-accent/5 rounded-full blur-3xl z-0"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-gradient-to-br from-npo-dark to-[#111827] text-white rounded-[3rem] p-8 md:p-12 shadow-2xl relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- 左半：控制滑塊與方案 -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-npo-primary font-extrabold tracking-widest text-sm uppercase"><i class="fa-solid fa-calculator mr-1"></i> IMPACT CALCULATOR</span>
+                        <h2 class="text-3xl md:text-4xl font-black">護持涓滴，<br>匯聚心靈清流</h2>
+                        <p class="text-gray-400 text-sm">
+                            拉動滑桿或點選金額，預估您的這筆智慧善款能具體在校園、社區中，推動何種程度的禪修、經典助印與心靈陪伴成效。
+                        </p>
+                        
+                        <!-- 快速選擇按鈕 -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="setCalculatorValue(500)" id="calc-btn-300" class="py-3 px-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 text-center font-black transition-all text-sm">NT$500/月</button>
+                            <button onclick="setCalculatorValue(1000)" id="calc-btn-700" class="py-3 px-2 rounded-2xl bg-npo-primary text-white border-2 border-npo-primary text-center font-black transition-all text-sm">NT$1000/月</button>
+                            <button onclick="setCalculatorValue(3000)" id="calc-btn-1500" class="py-3 px-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 text-center font-black transition-all text-sm">NT$3000/月</button>
+                        </div>
+
+                        <!-- 滑塊 -->
+                        <div class="space-y-2 pt-4">
+                            <div class="flex justify-between font-bold text-sm">
+                                <span>您的單月護持金額：</span>
+                                <span class="text-npo-secondary text-xl font-black">NT$ <span id="calc-amount-label">1000</span></span>
+                            </div>
+                            <input type="range" id="calc-slider" min="100" max="10000" step="100" value="1000" oninput="updateCalculatorFromSlider(this.value)" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-npo-primary">
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>100 元 (隨喜植福)</span>
+                                <span>10,000 元 (深度護持心靈導師下鄉)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右半：具體社會影響力產出 -->
+                    <div class="lg:col-span-6 bg-white/5 rounded-3xl p-8 border border-white/10 space-y-6">
+                        <h3 class="text-lg font-bold text-gray-300 border-b border-white/10 pb-4">
+                            預期能在受助地區落實的推廣成果：
+                        </h3>
+
+                        <!-- 成果 1 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-npo-accent/20 text-npo-accent rounded-xl flex items-center justify-center text-lg shrink-0 mt-1">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">經書與禪修卡助印：</h4>
+                                <p id="impact-water" class="text-sm text-gray-400 mt-1">預計能支持助印 3 本禪宗心靈指導手冊與 5 套生活禪語冥想卡，免費結緣予大眾。</p>
+                            </div>
+                        </div>
+
+                        <!-- 成果 2 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-emerald-500/20 text-npo-primary rounded-xl flex items-center justify-center text-lg shrink-0 mt-1">
+                                <i class="fa-solid fa-spa"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">學童靜坐教具補助：</h4>
+                                <p id="impact-food" class="text-sm text-gray-400 mt-1">購置並補充 2 位學童的一整套靜心教具、安心蒲團、禪修茶杯與繪畫沉澱手札。</p>
+                            </div>
+                        </div>
+
+                        <!-- 成果 3 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-orange-500/20 text-npo-secondary rounded-xl flex items-center justify-center text-lg shrink-0 mt-1">
+                                <i class="fa-solid fa-person-chalkboard"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">師資下鄉推廣費：</h4>
+                                <p id="impact-education" class="text-sm text-gray-400 mt-1">補助心靈導師赴偏鄉或弱勢課後陪伴據點，進行一次深度「禪坐專注力訓練」授課交通與教資費。</p>
+                            </div>
+                        </div>
+
+                        <!-- 結語行動按鈕 -->
+                        <button onclick="triggerDonationFromCalculator()" class="w-full bg-npo-primary hover:bg-amber-800 text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-300">
+                            按此金額隨喜護持，廣修福慧
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新消息與故事 (News & Impact Stories) -->
+    <section id="news" class="py-24 bg-npo-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <span class="text-npo-primary font-bold tracking-widest uppercase text-sm block">NEWS & STORIES</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-npo-dark mt-2">弘法推廣與感恩成果報告</h2>
+                </div>
+                <a href="#" class="border-2 border-npo-dark text-npo-dark hover:bg-npo-dark hover:text-white font-bold px-6 py-3 rounded-full transition-colors text-sm">
+                    查看所有歷史工作報告與快訊
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 故事卡片 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-gray-100">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=2070&auto=format&fit=crop" alt="兒童茶禪營隊" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-full">兒少心靈</span>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <span class="text-gray-400 text-xs font-bold"><i class="fa-solid fa-calendar mr-1"></i> 2026.05.10</span>
+                        <h3 class="text-xl font-bold text-npo-dark group-hover:text-npo-primary transition-colors line-clamp-2">
+                            【偏鄉紀實】茶禪一味：花蓮偏鄉兒童靜心體驗營圓滿閉幕
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-3">
+                            由三十位助緣善信護持，本會專業講師團隊本月於花蓮偏鄉國小，舉辦了為期三天的兒童禪修體驗。孩子們在生動的茶禮儀軌與專注吸氣吐納中，學會沉澱暴躁情緒...
+                        </p>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400">專案聯絡: 社會教育推廣部</span>
+                            <span class="text-npo-primary font-bold text-sm">閱讀更多 <i class="fa-solid fa-angle-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 故事卡片 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-gray-100">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2070&auto=format&fit=crop" alt="成人一日禪" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-cyan-600 text-white font-bold text-xs px-3 py-1.5 rounded-full">社區推廣</span>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <span class="text-gray-400 text-xs font-bold"><i class="fa-solid fa-calendar mr-1"></i> 2026.04.28</span>
+                        <h3 class="text-xl font-bold text-npo-dark group-hover:text-npo-primary transition-colors line-clamp-2">
+                            【現代減壓】竹科科技人減壓工作坊，重拾大腦深度沉靜
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-3">
+                            針對高工時與高焦慮的科技族群，台灣禪宗文化教育協會開辦社區公益禪坐工作坊。引導學員透過調身、調息與調心，快速進入深層放鬆，重組日常專注能量...
+                        </p>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400">專案聯絡: 社區關懷小組</span>
+                            <span class="text-npo-accent font-bold text-sm">閱讀更多 <i class="fa-solid fa-angle-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 故事卡片 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow group border border-gray-100">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=2070&auto=format&fit=crop" alt="禪宗經典" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-orange-600 text-white font-bold text-xs px-3 py-1.5 rounded-full">經典助印</span>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <span class="text-gray-400 text-xs font-bold"><i class="fa-solid fa-calendar mr-1"></i> 2026.04.15</span>
+                        <h3 class="text-xl font-bold text-npo-dark group-hover:text-npo-primary transition-colors line-clamp-2">
+                            【法寶結緣】新一期《六祖壇經心靈釋義》精裝助印，今日正式開啟
+                        </h3>
+                        <p class="text-gray-500 text-sm line-clamp-3">
+                            為利大眾了解達摩祖師及六祖大師心法，協會全新編撰了符合現代用語的隨身釋義版本。預計首刷 5,000 本，免費結緣於全國圖書館、大專院校與禪修社團...
+                        </p>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-400">專案聯絡: 經典編纂委員會</span>
+                            <span class="text-npo-secondary font-bold text-sm">閱讀更多 <i class="fa-solid fa-angle-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 財務公開透明性 (Trust & Transparency Section) -->
+    <section id="transparency" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- 左側：承諾文案與圖表 -->
+                <div class="space-y-6">
+                    <span class="text-npo-primary font-bold tracking-widest uppercase text-sm block">ACCOUNTABILITY</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-npo-dark leading-tight">十方信施，公開透明。<br>我們珍惜每一分托付的善緣。</h2>
+                    <p class="text-gray-500">
+                        社團法人台灣禪宗文化教育協會依法設立，所有的護持款與十方善資，均由專業外部會計師進行年度獨立稽核審查，向社會大眾及主管機關定期報告。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3 font-semibold text-npo-dark">
+                            <span class="w-6 h-6 bg-amber-100 text-npo-primary rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-check"></i></span>
+                            <span>完整公布年度勸募與法會隨喜之收支平衡明細表</span>
+                        </li>
+                        <li class="flex items-center space-x-3 font-semibold text-npo-dark">
+                            <span class="w-6 h-6 bg-amber-100 text-npo-primary rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-check"></i></span>
+                            <span>護持功德主均享有全額報稅抵扣，電子收支上傳國稅局服務</span>
+                        </li>
+                        <li class="flex items-center space-x-3 font-semibold text-npo-dark">
+                            <span class="w-6 h-6 bg-amber-100 text-npo-primary rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-check"></i></span>
+                            <span>致力降低行政庶務開銷，確保 82% 資金直接投入前線教育計畫</span>
+                        </li>
+                    </ul>
+                    <div class="pt-4">
+                        <a href="#" class="inline-flex items-center space-x-2 bg-npo-dark hover:bg-black text-white font-bold px-6 py-3.5 rounded-full transition-colors">
+                            <i class="fa-regular fa-file-pdf"></i>
+                            <span>下載 2025 年度財務稽核與工作成果年報</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 右側：款項流向比例圖示與重要數字 -->
+                <div class="bg-npo-light rounded-[3rem] p-8 md:p-12 border border-gray-100 relative shadow-sm">
+                    <h3 class="text-xl font-black text-npo-dark mb-6">資金額度流向分析 (2025)</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- 比例一 -->
+                        <div>
+                            <div class="flex justify-between font-bold text-sm mb-2 text-npo-dark">
+                                <span>心靈、禪坐、偏鄉學童禪修教育與教材印製項目</span>
+                                <span class="text-npo-primary font-extrabold text-base">82.3%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                <div class="bg-npo-primary h-full rounded-full" style="width: 82.3%"></div>
+                            </div>
+                        </div>
+
+                        <!-- 比例二 -->
+                        <div>
+                            <div class="flex justify-between font-bold text-sm mb-2 text-npo-dark">
+                                <span>心靈減壓大眾講座、學術論壇與推廣活動</span>
+                                <span class="text-npo-accent font-extrabold text-base">10.5%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                <div class="bg-npo-accent h-full rounded-full" style="width: 10.5%"></div>
+                            </div>
+                        </div>
+
+                        <!-- 比例三 -->
+                        <div>
+                            <div class="flex justify-between font-bold text-sm mb-2 text-npo-dark">
+                                <span>行政、系統維護、年度會計師簽證與人事維護</span>
+                                <span class="text-npo-secondary font-extrabold text-base">7.2%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                <div class="bg-npo-secondary h-full rounded-full" style="width: 7.2%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-gray-200/60 text-center">
+                        <div>
+                            <span class="text-3xl font-black text-npo-dark">150,000+</span>
+                            <span class="block text-xs text-gray-500 font-semibold mt-1">累計推廣受惠人次</span>
+                        </div>
+                        <div>
+                            <span class="text-3xl font-black text-npo-primary">100%</span>
+                            <span class="block text-xs text-gray-500 font-semibold mt-1">國內勸募流向依法公開</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="bg-npo-dark text-white pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-gray-800">
+            <!-- Footer 左側 Logo 與介紹 -->
+            <div class="md:col-span-4 space-y-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-npo-primary rounded-full flex items-center justify-center text-white font-black text-xl shadow-md">
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider block">Zen Culture</span>
+                        <span class="text-xs font-semibold text-npo-primary tracking-widest block -mt-1">台灣禪宗文化教育協會</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    社團法人台灣禪宗文化教育協會為內政部核准設立之社會團體。致力推動與普及禪法教育，藉由禪修智慧淨化社會人心，落實生命和諧與全人發展目標。
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-npo-primary flex items-center justify-center transition-colors text-gray-300 hover:text-white">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-npo-primary flex items-center justify-center transition-colors text-gray-300 hover:text-white">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-npo-primary flex items-center justify-center transition-colors text-gray-300 hover:text-white">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-npo-primary flex items-center justify-center transition-colors text-gray-300 hover:text-white">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer 中間：快速連結 -->
+            <div class="md:col-span-2 space-y-4">
+                <h4 class="font-bold text-gray-200">認識協會</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">創會緣起與宗旨</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">協會全國分佈據點</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">加入我們（志工招聘）</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">常見問題解答 FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="md:col-span-2 space-y-4">
+                <!-- 服務連結 -->
+                <h4 class="font-bold text-gray-200">護持管道</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">兒童禪心專案指南</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">企業團體一日禪</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">助印法寶功德申請</a></li>
+                    <li><a href="#" class="hover:text-npo-primary transition-colors">精選禪修墊/蒲團結緣</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer 右側：聯繫資訊與認證 -->
+            <div class="md:col-span-4 space-y-4">
+                <h4 class="font-bold text-gray-200">聯絡處資訊</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><i class="fa-solid fa-location-dot mr-2 text-npo-primary"></i> 台北市中正區忠孝東路x段xx號xx樓</li>
+                    <li><i class="fa-solid fa-phone mr-2 text-npo-primary"></i> 服務專線：(02) 2345-6789</li>
+                    <li><i class="fa-solid fa-clock mr-2 text-npo-primary"></i> 服務時間：週一至週五 09:00 - 18:00</li>
+                    <li><i class="fa-solid fa-id-card mr-2 text-npo-primary"></i> 統一編號：XXXXXXXX (公益社團法人)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 版權與免責 -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+            <div>
+                © 2026 Association of Zen Buddhism Culture and Education Taiwan. 版權所有. 
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:underline">隱私權保護政策</a>
+                <a href="#" class="hover:underline">資訊安全條款</a>
+                <a href="#" class="hover:underline">退款服務約定</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ============================== 互動模態視窗與腳本 (Modals & JavaScript) ============================== -->
+
+    <!-- 多步驟捐款與資助模態框 (Donation & Checkout Modal) -->
+    <div id="donation-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-lg mx-4 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 relative max-h-[90vh] flex flex-col">
+            <!-- 模態框頭部 -->
+            <div class="bg-npo-dark text-white p-6 relative">
+                <button onclick="closeDonationModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white font-bold text-lg focus:outline-none">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <span class="text-npo-primary text-xs font-bold uppercase tracking-wider block mb-1"><i class="fa-solid fa-heart-pulse mr-1"></i> SECURE护持系统</span>
+                <h3 class="text-xl font-black">填寫您的隨喜護持款</h3>
+            </div>
+
+            <!-- 多步驟指示器 -->
+            <div class="flex bg-npo-light px-6 py-3 border-b border-gray-100 text-xs font-bold text-gray-400">
+                <span id="step-tab-1" class="flex-1 text-npo-primary"><i class="fa-solid fa-circle-check mr-1"></i>1. 選擇方案</span>
+                <span id="step-tab-2" class="flex-1"><i class="fa-regular fa-circle mr-1"></i>2. 付款與個資</span>
+                <span id="step-tab-3" class="flex-1"><i class="fa-regular fa-circle mr-1"></i>3. 完成感謝</span>
+            </div>
+
+            <!-- 模態框身體 (可滾動) -->
+            <div class="p-6 flex-1 overflow-y-auto space-y-6">
+                <!-- 第一步內容 -->
+                <div id="modal-step-1" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">護持頻率</label>
+                        <div class="grid grid-cols-2 gap-3 p-1 bg-npo-light rounded-2xl border border-gray-100">
+                            <button onclick="toggleModalFrequency('regular')" id="freq-regular" class="py-3 rounded-xl font-bold text-center text-sm transition-all shadow-sm bg-white text-npo-primary">
+                                定期護持 (每月)
+                            </button>
+                            <button onclick="toggleModalFrequency('one-time')" id="freq-one-time" class="py-3 rounded-xl font-bold text-center text-sm transition-all text-gray-500 hover:text-npo-dark">
+                                單筆隨喜護持
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">選擇或輸入金額 (NT$)</label>
+                        <div class="grid grid-cols-4 gap-2 mb-3">
+                            <button onclick="selectModalAmount(300)" id="amt-btn-300" class="py-2.5 rounded-xl border border-gray-200 text-sm font-bold hover:bg-npo-light transition-colors text-npo-dark">300</button>
+                            <button onclick="selectModalAmount(1000)" id="amt-btn-1000" class="py-2.5 rounded-xl border border-gray-200 text-sm font-bold hover:bg-npo-light transition-colors text-npo-dark">1000</button>
+                            <button onclick="selectModalAmount(3000)" id="amt-btn-2000" class="py-2.5 rounded-xl border border-gray-200 text-sm font-bold hover:bg-npo-light transition-colors text-npo-dark">3000</button>
+                            <button onclick="selectModalAmount(5000)" id="amt-btn-5000" class="py-2.5 rounded-xl border border-gray-200 text-sm font-bold hover:bg-npo-light transition-colors text-npo-dark font-black text-npo-primary border-npo-primary">5000</button>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-400 font-bold text-sm">NT$</span>
+                            <input type="number" id="custom-donation-amount" oninput="handleCustomAmountInput()" value="5000" placeholder="輸入其他任意金額" class="w-full pl-12 pr-4 py-3 border border-gray-200 bg-npo-light rounded-2xl focus:outline-none focus:ring-2 focus:ring-npo-primary font-bold text-npo-dark">
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex items-start space-x-3">
+                        <i class="fa-solid fa-shield-halved text-npo-primary text-lg mt-0.5"></i>
+                        <p class="text-xs text-emerald-800 leading-relaxed">
+                            本會採用 SSL 256-bit 高標準安控安全傳輸系統，保護您的線上信用卡付款與個資安全。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 第二步內容 (付款與個資) -->
+                <div id="modal-step-2" class="hidden space-y-4">
+                    <h4 class="font-bold text-npo-dark border-b pb-2">捐贈護持人個人資訊</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1">您的姓名 *</label>
+                            <input type="text" id="donor-name" placeholder="王小明" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1">行動電話 *</label>
+                            <input type="tel" id="donor-phone" placeholder="0912-345678" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 mb-1">電子郵件信箱 *</label>
+                        <input type="email" id="donor-email" placeholder="example@gmail.com" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary">
+                    </div>
+
+                    <div class="flex items-center space-x-2 pt-2">
+                        <input type="checkbox" id="tax-receipt-needed" class="w-4 h-4 text-npo-primary border-gray-300 rounded focus:ring-npo-primary">
+                        <label for="tax-receipt-needed" class="text-xs font-bold text-gray-700">我需要申報扣除額收據（身分證核對自動上傳國稅局）</label>
+                    </div>
+
+                    <h4 class="font-bold text-npo-dark border-b pb-2 pt-4">安全付款方式 (信用卡模擬)</h4>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <label class="block text-xs font-bold text-gray-500 mb-1">卡號</label>
+                            <input type="text" value="4311 9522 8888 8888" placeholder="XXXX XXXX XXXX XXXX" class="w-full bg-npo-light border border-gray-100 pl-4 pr-12 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary font-mono tracking-wider">
+                            <i class="fa-brands fa-cc-visa absolute right-4 top-9 text-blue-800 text-xl"></i>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">有效期 (MM/YY)</label>
+                                <input type="text" value="12/29" placeholder="MM/YY" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">安全碼 (CVC/CVV)</label>
+                                <input type="text" value="321" placeholder="3 位數" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary font-mono">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第三步內容 (成功完成) -->
+                <div id="modal-step-3" class="hidden text-center py-8 space-y-4">
+                    <div class="w-20 h-20 bg-emerald-100 text-npo-primary rounded-full flex items-center justify-center text-4xl mx-auto shadow-inner">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-npo-dark">謝謝您的十方助緣！</h4>
+                    <p class="text-gray-500 text-sm max-w-sm mx-auto">
+                        款項已模擬扣款成功。確認信與電子收據（若有填寫）已寄發至您的信箱。您已正式成為護持我們禪心傳播的一員！
+                    </p>
+                    <div class="p-4 bg-npo-light rounded-2xl text-left border text-xs text-gray-400 space-y-1">
+                        <div><strong>支持方案：</strong><span id="receipt-type">定期護持專案</span></div>
+                        <div><strong>付款金額：</strong><span id="receipt-amount">NT$ 5000</span></div>
+                        <div><strong>訂單編號：</strong>ZN-2026-99128</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模態框尾部 -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+                <button id="modal-prev-btn" onclick="modalPrevStep()" class="text-gray-500 hover:text-npo-dark font-bold text-sm hidden">
+                    <i class="fa-solid fa-chevron-left"></i> 回上一頁
+                </button>
+                <div class="flex-1"></div>
+                <button id="modal-next-btn" onclick="modalNextStep()" class="bg-npo-primary hover:bg-amber-800 text-white font-bold px-8 py-3 rounded-2xl shadow transition-colors text-sm">
+                    下一步，填寫個資 <i class="fa-solid fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================== 動態核心 JS 邏輯 ============================== -->
+    <script>
+        // --- 1. 護持項目資料庫與過濾邏輯 ---
+        const initialChildren = [
+            { id: 1, name: "偏鄉學童禪心夏令營", age: 5, gender: "boy", region: "asia", country: "花蓮偏鄉", story: "針對偏鄉弱勢、家庭隔代教養學童舉辦的三天兩夜靜心營，引導孩子從呼吸與禪畫中找到專注力，急需交通與營隊餐點助緣。", img: "https://images.unsplash.com/photo-1540479859555-17af45c78602?q=80&w=600&auto=format&fit=crop" },
+            { id: 2, name: "《六祖壇經釋義》助印結緣", age: 9, gender: "girl", region: "latin", country: "文化推廣", story: "免費大眾結緣書。採用精裝高質感現代化排版與圖解，預計印製 3,000 本，提供給全國大專院校圖書館與禪修點免費索取。", img: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=600&auto=format&fit=crop" },
+            { id: 3, name: "社區銀髮拉伸與禪坐班", age: 10, gender: "boy", region: "africa", country: "社區普及", story: "深耕基層社區，開辦溫和的經絡拉伸與禪修調息課程，陪伴銀髮族穩定心境、排解寂寞焦慮並重建身心和諧。", img: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=600&auto=format&fit=crop" },
+            { id: 4, name: "少年矯正與心靈關懷營", age: 14, gender: "girl", region: "asia", country: "輔導機構", story: "與少輔會、少年之家合作，為高關懷青少年提供免費心靈靜坐與情緒引導，透過深層沉澱協助孩子自我省察並回歸正軌。", img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop" },
+            { id: 5, name: "專業禪修師資長期培育計畫", age: 6, gender: "boy", region: "asia", country: "師資培訓", story: "甄選並培訓心理學、教育學與靈性關懷背景的志師，進行為期一年的正統禪宗經典與教學訓練，儲備下鄉推廣的薪傳火種。", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop" },
+            { id: 6, name: "科技人一日禪與茶禪夜", age: 13, gender: "boy", region: "africa", country: "園區關懷", story: "專為高壓、高焦慮的竹科與內科白領階級設計，提供半日或一日的不插電「茶禪靜修」，培育工作之餘快速沉靜大腦的習慣。", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop" },
+            { id: 7, name: "青少年正念生活夏令營", age: 15, gender: "girl", region: "latin", country: "校園推廣", story: "走進大專與高中校園，透過社團聯誼、正念生活體驗與團隊解謎，打破禪修古板偏見，讓青年人在活潑中體悟生活禪智慧。", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop" },
+            { id: 8, name: "醫護前線紓壓與調心茶禪", age: 7, gender: "girl", region: "africa", country: "醫院關懷", story: "為醫院醫護與社工等長期處於身心疲軟狀態的高壓第一線人員，開設安心微型禪心班，提供靈性復原力與支持環境。", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=600&auto=format&fit=crop" }
+        ];
+
+        let currentGenderFilter = "all";
+
+        // 動態生成項目卡片
+        function renderChildren(children) {
+            const grid = document.getElementById("children-grid");
+            const alert = document.getElementById("no-children-alert");
+            grid.innerHTML = "";
+
+            if (children.length === 0) {
+                grid.classList.add("hidden");
+                alert.classList.remove("hidden");
+                return;
+            }
+
+            grid.classList.remove("hidden");
+            alert.classList.add("hidden");
+
+            children.forEach(child => {
+                const card = `
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col group child-card-transition">
+                        <!-- 項目視覺圖 -->
+                        <div class="h-64 relative overflow-hidden bg-gray-100">
+                            <img src="${child.img}" alt="${child.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white font-bold text-xs py-1.5 px-3 rounded-full flex items-center space-x-1.5">
+                                <i class="fa-solid fa-location-dot text-npo-secondary"></i>
+                                <span>${child.country}</span>
+                            </div>
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-npo-dark font-extrabold text-xs px-3 py-1 rounded-full shadow-sm">
+                                ${child.age >= 12 ? '長期深耕' : child.age >= 8 ? '中期工作坊' : '短期/單次'} | ${child.gender === 'boy' ? '急需護持' : '穩健推廣'}
+                            </span>
+                        </div>
+                        
+                        <!-- 內容介紹 -->
+                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-xl font-black text-npo-dark flex items-center space-x-2">
+                                    <span class="line-clamp-1">${child.name}</span>
+                                </h3>
+                                <p class="text-xs text-gray-500 mt-2 line-clamp-3 leading-relaxed">
+                                    ${child.story}
+                                </p>
+                            </div>
+                            
+                            <button onclick="startSponsorship('${child.name}', ${child.id})" class="w-full bg-npo-primary hover:bg-amber-800 text-white font-bold py-3 rounded-2xl transition-all duration-300 shadow hover:shadow-lg transform active:scale-95 text-sm flex items-center justify-center space-x-1">
+                                <i class="fa-solid fa-dharmachakra"></i>
+                                <span>認助護持此項目</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML("beforeend", card);
+            });
+        }
+
+        // 設置性別過濾樣式並驅動篩選
+        function setGenderFilter(gender) {
+            currentGenderFilter = gender;
+            ["all", "boy", "girl"].forEach(g => {
+                const btn = document.getElementById(`gender-${g}`);
+                if (g === gender) {
+                    btn.className = "flex-1 text-center py-2 rounded-xl text-sm font-bold bg-white text-npo-primary shadow-sm transition-all";
+                } else {
+                    btn.className = "flex-1 text-center py-2 rounded-xl text-sm font-bold text-gray-500 hover:text-npo-dark transition-all";
+                }
+            });
+            filterChildren();
+        }
+
+        // 核心過濾器
+        function filterChildren() {
+            const region = document.getElementById("filter-region").value;
+            const ageFilter = document.getElementById("filter-age").value;
+
+            let filtered = initialChildren;
+
+            // 地區過濾
+            if (region !== "all") {
+                filtered = filtered.filter(c => c.region === region);
+            }
+
+            // 年齡過濾
+            if (ageFilter !== "all") {
+                filtered = filtered.filter(c => {
+                    if (ageFilter === "young") return c.age >= 4 && c.age <= 7;
+                    if (ageFilter === "school") return c.age >= 8 && c.age <= 11;
+                    if (ageFilter === "teen") return c.age >= 12 && c.age <= 15;
+                    return true;
+                });
+            }
+
+            // 性別過濾
+            if (currentGenderFilter !== "all") {
+                filtered = filtered.filter(c => c.gender === currentGenderFilter);
+            }
+
+            renderChildren(filtered);
+        }
+
+        // 啟動資助
+        function startSponsorship(childName, childId) {
+            openDonationModal('regular');
+            // 將自訂輸入框設定為定期禪修護持標準（如 1000元/月）並提示
+            document.getElementById("custom-donation-amount").value = 1000;
+            document.getElementById("receipt-type").innerText = `每月定期護持項目：${childName} (項目號 #${1000 + childId})`;
+            updateActiveAmountButton(1000);
+        }
+
+
+        // --- 2. 實時影響力計算機邏輯 ---
+        function updateCalculatorFromSlider(val) {
+            document.getElementById("calc-amount-label").innerText = val;
+            updateCalculatorResults(parseInt(val));
+            updateActiveCalcButton(val);
+        }
+
+        function setCalculatorValue(val) {
+            document.getElementById("calc-slider").value = val;
+            document.getElementById("calc-amount-label").innerText = val;
+            updateCalculatorResults(val);
+            updateActiveCalcButton(val);
+        }
+
+        function updateActiveCalcButton(val) {
+            [500, 1000, 3000].forEach(v => {
+                const btn = document.getElementById(`calc-btn-${v === 500 ? '300' : v === 1000 ? '700' : '1500'}`);
+                if (btn) {
+                    if (v === parseInt(val)) {
+                        btn.className = "py-3 px-2 rounded-2xl bg-npo-primary text-white border-2 border-npo-primary text-center font-black transition-all text-sm";
+                    } else {
+                        btn.className = "py-3 px-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 text-center font-black transition-all text-sm";
+                    }
+                }
+            });
+        }
+
+        function updateCalculatorResults(val) {
+            let waterText = "";
+            let foodText = "";
+            let eduText = "";
+
+            if (val < 1000) {
+                waterText = `預計支持助印 2 本高規精裝版《六祖壇經心靈釋義》，免費與大眾結緣。`;
+                foodText = `購置並補充 1 位偏鄉弱勢學童的一整套「安心禪定教具」及繪畫手札。`;
+                eduText = `補助社區 1 位年長者完整一個月、每週一次之溫和調息禪坐課茶席費用。`;
+            } else if (val >= 1000 && val < 2500) {
+                const booksCount = Math.floor(val / 200);
+                waterText = `預計能支持助印 ${booksCount} 本高質感心靈禪修手冊，寄送至全台大專院校圖書館。`;
+                foodText = `供應 2 位偏鄉學童一整學期靜修課所需專用天然蒲團與安心茶禮盒。`;
+                eduText = `補助專業心理/禪修導師下鄉，至課後陪伴據點進行 1 次深度正念情緒引導工作坊。`;
+            } else if (val >= 2500 && val < 6000) {
+                const classCount = Math.floor(val / 1000);
+                waterText = `支持編纂與拍攝 1 系列適合大眾隨選的數位禪坐影片課程，在線上造福數百位學員。`;
+                foodText = `深度培育 1 名熱忱青年志工，完成完整一季的專業兒童與成人禪修師資專業訓。`;
+                eduText = `全額贊助 1 場前進公立中學、為期半日之「青少年安心減壓靜心營」全體教材費用。`;
+            } else {
+                waterText = `資助整套全新禪修中心公共圖書閣建立，購置百本禪學著作、心理學巨擘經典。`;
+                foodText = `全額支持全校區規模（約120位師生）一整學年「每週半小時校園晨間靜心」師資下鄉總費用。`;
+                eduText = `全面贊助本會籌辦 1 場國內大型學術「現代心靈禪修論壇」，特聘國際專家座談。`;
+            }
+
+            document.getElementById("impact-water").innerText = waterText;
+            document.getElementById("impact-food").innerText = foodText;
+            document.getElementById("impact-education").innerText = eduText;
+        }
+
+        function triggerDonationFromCalculator() {
+            const currentAmount = document.getElementById("calc-slider").value;
+            openDonationModal('one-time');
+            document.getElementById("custom-donation-amount").value = currentAmount;
+            updateActiveAmountButton(currentAmount);
+        }
+
+
+        // --- 3. 模態框與多步驟支付邏輯 ---
+        let modalCurrentStep = 1;
+        let donationFrequency = "regular"; // 'regular' or 'one-time'
+
+        function openDonationModal(type) {
+            const modal = document.getElementById("donation-modal");
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+            }, 50);
+
+            toggleModalFrequency(type);
+            modalCurrentStep = 1;
+            updateStepUI();
+        }
+
+        function closeDonationModal() {
+            const modal = document.getElementById("donation-modal");
+            modal.classList.add("opacity-0");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 300);
+        }
+
+        function toggleModalFrequency(freq) {
+            donationFrequency = freq;
+            const regBtn = document.getElementById("freq-regular");
+            const otBtn = document.getElementById("freq-one-time");
+
+            if (freq === "regular") {
+                regBtn.className = "py-3 rounded-xl font-bold text-center text-sm transition-all shadow-sm bg-white text-npo-primary";
+                otBtn.className = "py-3 rounded-xl font-bold text-center text-sm transition-all text-gray-500 hover:text-npo-dark";
+            } else {
+                otBtn.className = "py-3 rounded-xl font-bold text-center text-sm transition-all shadow-sm bg-white text-npo-primary";
+                regBtn.className = "py-3 rounded-xl font-bold text-center text-sm transition-all text-gray-500 hover:text-npo-dark";
+            }
+        }
+
+        function selectModalAmount(amount) {
+            document.getElementById("custom-donation-amount").value = amount;
+            updateActiveAmountButton(amount);
+        }
+
+        function handleCustomAmountInput() {
+            const amount = document.getElementById("custom-donation-amount").value;
+            updateActiveAmountButton(amount);
+        }
+
+        function updateActiveAmountButton(amount) {
+            [300, 1000, 3000, 5000].forEach(val => {
+                const btn = document.getElementById(`amt-btn-${val === 300 ? '300' : val === 1000 ? '700' : val === 3000 ? '1000' : '5000'}`);
+                if (btn) {
+                    if (val === parseInt(amount)) {
+                        btn.classList.add("border-npo-primary", "text-npo-primary", "font-black");
+                    } else {
+                        btn.classList.remove("border-npo-primary", "text-npo-primary", "font-black");
+                    }
+                }
+            });
+        }
+
+        // 控管步驟切換
+        function updateStepUI() {
+            // 先隱藏所有步驟
+            document.getElementById("modal-step-1").classList.add("hidden");
+            document.getElementById("modal-step-2").classList.add("hidden");
+            document.getElementById("modal-step-3").classList.add("hidden");
+
+            // 顯示當前
+            document.getElementById(`modal-step-${modalCurrentStep}`).classList.remove("hidden");
+
+            // 設定頁眉 Tab 狀態
+            for (let i = 1; i <= 3; i++) {
+                const tab = document.getElementById(`step-tab-${i}`);
+                if (i < modalCurrentStep) {
+                    tab.className = "flex-1 text-npo-primary";
+                    tab.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i>${i === 1 ? '1. 選擇方案' : i === 2 ? '2. 付款與個資' : '3. 完成感謝'}`;
+                } else if (i === modalCurrentStep) {
+                    tab.className = "flex-1 text-npo-dark font-black border-b-2 border-npo-primary pb-1";
+                    tab.innerHTML = `<i class="fa-regular fa-circle-dot mr-1"></i>${i === 1 ? '1. 選擇方案' : i === 2 ? '2. 付款與個資' : '3. 完成感謝'}`;
+                } else {
+                    tab.className = "flex-1 text-gray-400";
+                    tab.innerHTML = `<i class="fa-regular fa-circle mr-1"></i>${i === 1 ? '1. 選擇方案' : i === 2 ? '2. 付款與個資' : '3. 完成感謝'}`;
+                }
+            }
+
+            // 按鈕控制
+            const prevBtn = document.getElementById("modal-prev-btn");
+            const nextBtn = document.getElementById("modal-next-btn");
+
+            if (modalCurrentStep === 1) {
+                prevBtn.classList.add("hidden");
+                nextBtn.innerHTML = `下一步，填寫個資 <i class="fa-solid fa-chevron-right ml-1"></i>`;
+                nextBtn.className = "bg-npo-primary hover:bg-amber-800 text-white font-bold px-8 py-3 rounded-2xl shadow transition-colors text-sm";
+            } else if (modalCurrentStep === 2) {
+                prevBtn.classList.remove("hidden");
+                nextBtn.innerHTML = `確認隨喜護持 <i class="fa-solid fa-heart ml-1"></i>`;
+                nextBtn.className = "bg-npo-secondary hover:bg-amber-600 text-white font-bold px-8 py-3 rounded-2xl shadow transition-colors text-sm";
+            } else if (modalCurrentStep === 3) {
+                prevBtn.classList.add("hidden");
+                nextBtn.innerHTML = `完成關閉 <i class="fa-solid fa-check ml-1"></i>`;
+                nextBtn.className = "bg-npo-dark hover:bg-black text-white font-bold px-8 py-3 rounded-2xl shadow transition-colors text-sm";
+            }
+        }
+
+        function modalNextStep() {
+            if (modalCurrentStep === 1) {
+                const amt = document.getElementById("custom-donation-amount").value;
+                if (!amt || parseInt(amt) <= 0) {
+                    alert("請輸入大於 0 的有效護持金額。");
+                    return;
+                }
+                modalCurrentStep = 2;
+                updateStepUI();
+            } else if (modalCurrentStep === 2) {
+                const name = document.getElementById("donor-name").value;
+                const phone = document.getElementById("donor-phone").value;
+                const email = document.getElementById("donor-email").value;
+
+                if (!name || !phone || !email) {
+                    alert("請填寫所有星號 (*) 必填資訊，以利開立所得稅收據！");
+                    return;
+                }
+
+                const finalAmt = document.getElementById("custom-donation-amount").value;
+                document.getElementById("receipt-amount").innerText = `NT$ ${finalAmt}`;
+                
+                if (donationFrequency === "regular" && !document.getElementById("receipt-type").innerText.includes("項目")) {
+                    document.getElementById("receipt-type").innerText = "定期定額護持 (每月心靈教育基金)";
+                } else if (donationFrequency !== "regular") {
+                    document.getElementById("receipt-type").innerText = "單筆隨喜護持";
+                }
+
+                modalCurrentStep = 3;
+                updateStepUI();
+            } else if (modalCurrentStep === 3) {
+                closeDonationModal();
+            }
+        }
+
+        function modalPrevStep() {
+            if (modalCurrentStep === 2) {
+                modalCurrentStep = 1;
+                updateStepUI();
+            }
+        }
+
+
+        // --- 4. 移動版選單邏輯 ---
+        document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+            const menu = document.getElementById("mobile-menu");
+            menu.classList.toggle("hidden");
+        });
+
+
+        // --- 5. 初始化與載入 ---
+        window.onload = function() {
+            renderChildren(initialChildren);
+            updateCalculatorResults(1000);
+        };
+    </script>
+</body>
+</html>
