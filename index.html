@@ -503,10 +503,6 @@
                         </li>
                         <li class="flex items-center space-x-3 font-semibold text-npo-dark">
                             <span class="w-6 h-6 bg-amber-100 text-npo-primary rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-check"></i></span>
-                            <span>護持功德主均享有全額報稅抵扣，電子收支上傳國稅局服務</span>
-                        </li>
-                        <li class="flex items-center space-x-3 font-semibold text-npo-dark">
-                            <span class="w-6 h-6 bg-amber-100 text-npo-primary rounded-full flex items-center justify-center text-sm"><i class="fa-solid fa-check"></i></span>
                             <span>致力降低行政庶務開銷，確保 82% 資金直接投入前線教育計畫</span>
                         </li>
                     </ul>
@@ -728,11 +724,6 @@
                     <div>
                         <label class="block text-xs font-bold text-gray-500 mb-1">電子郵件信箱 *</label>
                         <input type="email" id="donor-email" placeholder="example@gmail.com" class="w-full bg-npo-light border border-gray-100 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-npo-primary">
-                    </div>
-
-                    <div class="flex items-center space-x-2 pt-2">
-                        <input type="checkbox" id="tax-receipt-needed" class="w-4 h-4 text-npo-primary border-gray-300 rounded focus:ring-npo-primary">
-                        <label for="tax-receipt-needed" class="text-xs font-bold text-gray-700">我需要申報扣除額收據（身分證核對自動上傳國稅局）</label>
                     </div>
 
                     <h4 class="font-bold text-npo-dark border-b pb-2 pt-4">安全付款方式 (信用卡模擬)</h4>
@@ -1093,7 +1084,7 @@
                 const email = document.getElementById("donor-email").value;
 
                 if (!name || !phone || !email) {
-                    alert("請填寫所有星號 (*) 必填資訊，以利開立所得稅收據！");
+                    alert("請填寫所有星號 (*) 必填資訊，以利開立收據");
                     return;
                 }
 
