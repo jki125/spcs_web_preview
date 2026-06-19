@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社團法人台灣禪宗文化教育協會 (TZCEA)</title>
+    <title>社團法人台灣禪宗文化教育協會 | 禪意互動入口網</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -16,13 +16,14 @@
                     },
                     colors: {
                         zen: {
-                            green: '#2C4C3B',
-                            light: '#4A7C59',
-                            brown: '#8C7A6B',
-                            bg: '#F9F8F3',
-                            card: '#FFFFFF',
-                            text: '#333333',
-                            accent: '#D97757'
+                            wood: '#1F2421',
+                            moss: '#3B4D43',
+                            bamboo: '#5C6F5E',
+                            sand: '#C5B49E',
+                            paper: '#F5F2EB',
+                            mist: '#EAE5D9',
+                            ink: '#2B2B2B',
+                            vermilion: '#B25D42'
                         }
                     }
                 }
@@ -31,16 +32,30 @@
     </script>
     <style>
         body {
-            background-color: #F9F8F3;
-            color: #333333;
+            background-color: #F5F2EB;
+            color: #2B2B2B;
         }
         
         .nav-link {
-            transition: color 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            background-color: #B25D42;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         .nav-link:hover, .nav-link.active {
-            color: #D97757;
-            border-bottom: 2px solid #D97757;
+            color: #B25D42;
         }
 
         .chart-container {
@@ -59,173 +74,200 @@
             }
         }
 
+        .tab-btn {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
         .tab-btn.active {
-            background-color: #2C4C3B;
-            color: white;
-            border-color: #2C4C3B;
+            background-color: #3B4D43;
+            color: #F5F2EB;
+            border-color: #3B4D43;
+            box-shadow: 0 4px 20px rgba(59, 77, 67, 0.15);
         }
 
         .fade-in {
-            animation: fadeIn 0.8s ease-in;
+            animation: zenFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes zenFadeIn {
+            from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
+            height: 20px;
+            width: 20px;
             border-radius: 50%;
-            background: #D97757;
+            background: #B25D42;
+            border: 2px solid #F5F2EB;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
             cursor: pointer;
             margin-top: -8px;
+            transition: transform 0.2s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
-            height: 8px;
+            height: 4px;
             cursor: pointer;
-            background: #e2e8f0;
-            border-radius: 4px;
+            background: #C5B49E;
+            border-radius: 2px;
         }
     </style>
 </head>
-<body class="font-sans antialiased text-zen-text">
+<body class="font-sans antialiased text-zen-ink">
 
-    <!-- Chosen Palette: Zen Earth Tones (Dark Green #2C4C3B, Warm Brown #8C7A6B, Accent Terra Cotta #D97757, Parchment Bg #F9F8F3) -->
-    <!-- Application Structure Plan: A Single Page Application (SPA) structured to guide users from the emotional core (Origin) to practical actions (Programs), backed by data (Impact), and culminating in action (Donate). Navigation is sticky for easy access. Interactive tabs organize complex program details without scrolling fatigue. Data visualizations validate the association's goals. -->
-    <!-- Visualization & Content Choices: Report Info: Programs & Fund Allocation -> Goal: Inform & Validate -> Viz: Chart.js Doughnut & Bar Charts -> Interaction: Tooltips & Hover -> Justification: Clearly breaks down how funds are used and the scale of impact, building trust -> Library: Chart.js. Report Info: Donation -> Goal: Engage -> Viz: Interactive Range Slider -> Justification: Tangibly connects donation amounts to real-world outcomes. -->
+    <!-- Chosen Palette: Ink and Paper Zen (Parchment Bg #F5F2EB, Pine Moss #3B4D43, Sand Gold #C5B49E, Zen Vermilion Accent #B25D42) -->
+    <!-- Application Structure Plan: Guided Zen Journey. Utilizing generous spacing (py-24), elegant minimalist lines, vertical visual anchors, and tranquil interactive states. We integrate a live interactive background water ripple effect on the hero section to evoke inner peace, leading to the origin timeline, program details under a classic screen tab-layout, and an aesthetic calculator illustrating child adoption outcomes in a deep meditative container. -->
+    <!-- Visualization & Content Choices: Report Content: Program Distribution and Future Impact -> Goal: Inspire Trust and Calm Verification -> Viz: Custom-themed Chart.js Doughnut and Bar charts in muted mineral colors with elegant sans-serif typography -> Interaction: Responsive tooltips -> Justification: Replaces modern fluorescent dashboards with a classic art gallery style presentation. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <nav class="fixed w-full bg-zen-bg/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center">
-                    <span class="text-2xl mr-2 text-zen-green">🍵</span>
-                    <span class="font-bold text-xl md:text-2xl text-zen-green tracking-wider">TZCEA 台灣禪宗文化教育協會</span>
+    <nav class="fixed w-full bg-zen-paper/90 backdrop-blur-md z-50 transition-all duration-300 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl font-light text-zen-moss">☯</span>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg md:text-xl text-zen-wood tracking-widest">台灣禪宗文化教育協會</span>
+                        <span class="text-[10px] text-stone-500 tracking-wider">TAIWAN ZEN CULTURE & EDUCATION ASSOCIATION</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link font-medium text-zen-brown py-2">首頁</a>
-                    <a href="#about" class="nav-link font-medium text-zen-brown py-2">關於協會</a>
-                    <a href="#programs" class="nav-link font-medium text-zen-brown py-2">核心計畫</a>
-                    <a href="#impact" class="nav-link font-medium text-zen-brown py-2">成效與透明度</a>
-                    <a href="#donate" class="bg-zen-accent hover:bg-orange-700 text-white px-6 py-2 rounded-full font-medium transition-colors">支持我們</a>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="nav-link text-sm tracking-widest text-stone-600 font-medium py-2">首頁</a>
+                    <a href="#about" class="nav-link text-sm tracking-widest text-stone-600 font-medium py-2">創會緣起</a>
+                    <a href="#programs" class="nav-link text-sm tracking-widest text-stone-600 font-medium py-2">三昧行願</a>
+                    <a href="#impact" class="nav-link text-sm tracking-widest text-stone-600 font-medium py-2">因緣願力</a>
+                    <a href="#donate" class="bg-zen-vermilion hover:bg-red-800 text-zen-paper px-8 py-3 rounded-full text-xs tracking-widest font-bold transition-all transform hover:scale-105 shadow-md">
+                        共襄善舉
+                    </a>
                 </div>
                 <div class="flex items-center md:hidden">
-                    <button id="mobile-menu-btn" class="text-zen-green text-3xl">≡</button>
+                    <button id="mobile-menu-btn" class="text-zen-wood text-3xl focus:outline-none">☰</button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-zen-bg border-t border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
-                <a href="#home" class="block px-3 py-2 text-zen-brown font-medium">首頁</a>
-                <a href="#about" class="block px-3 py-2 text-zen-brown font-medium">關於協會</a>
-                <a href="#programs" class="block px-3 py-2 text-zen-brown font-medium">核心計畫</a>
-                <a href="#impact" class="block px-3 py-2 text-zen-brown font-medium">成效與透明度</a>
-                <a href="#donate" class="block px-3 py-2 text-zen-accent font-bold">支持我們</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-zen-paper border-t border-stone-200">
+            <div class="px-6 py-6 space-y-4 flex flex-col text-center">
+                <a href="#home" class="text-stone-600 tracking-widest font-medium py-2">首頁</a>
+                <a href="#about" class="text-stone-600 tracking-widest font-medium py-2">創會緣起</a>
+                <a href="#programs" class="text-stone-600 tracking-widest font-medium py-2">三昧行願</a>
+                <a href="#impact" class="text-stone-600 tracking-widest font-medium py-2">因緣願力</a>
+                <a href="#donate" class="text-zen-vermilion tracking-widest font-bold py-2">共襄善舉</a>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 flex flex-col items-center justify-center text-center min-h-[80vh] relative overflow-hidden bg-zen-green text-white">
-        <div class="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
-            <span class="text-[40rem] leading-none">🌿</span>
-        </div>
-        <div class="relative z-10 max-w-4xl mx-auto fade-in">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 tracking-wide leading-tight">
+    <section id="home" class="relative pt-32 pb-24 md:pt-48 md:pb-36 px-6 flex flex-col items-center justify-center text-center min-h-screen overflow-hidden bg-zen-paper">
+        <canvas id="rippleCanvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
+        
+        <div class="relative z-10 max-w-4xl mx-auto fade-in pointer-events-none select-none">
+            <span class="text-stone-400 text-xs tracking-widest block mb-4">── 一花一世界 ‧ 一葉一如來 ──</span>
+            <h1 class="text-4xl md:text-6xl font-light text-zen-wood mb-8 tracking-[0.5em] leading-snug pl-[0.5em]">
                 連結慈悲的橋樑
             </h1>
-            <p class="text-xl md:text-2xl text-gray-200 mb-8 font-light italic">
-                A Bridge of Compassion connecting Taiwan, Madagascar, and the United States.
+            <p class="text-sm md:text-md text-stone-500 tracking-widest mb-12 uppercase">
+                A Bridge of Compassion · Taiwan · Madagascar · USA
             </p>
-            <div class="h-1 w-24 bg-zen-accent mx-auto mb-8"></div>
-            <p class="text-lg md:text-xl text-gray-100 mb-12 max-w-2xl mx-auto leading-relaxed">
-                發揚西祖三禪文化、為非洲教育與慈善盡份力。<br>推動六祖學校教育，播下希望的種子。
+            <div class="h-[1px] w-32 bg-zen-sand mx-auto mb-12"></div>
+            <p class="text-base md:text-lg text-zen-moss mb-16 max-w-2xl mx-auto leading-loose tracking-widest font-light">
+                靜品茶禪之樂，化為無疆之愛。<br>
+                以西祖禪法洗滌心靈，在非洲荒野築起六祖教育淨土。
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#donate" class="bg-zen-accent hover:bg-orange-700 text-white text-lg px-8 py-4 rounded-full font-bold transition-transform transform hover:scale-105 shadow-lg">
-                    立即行動 / 認養孩童
+            <div class="flex flex-col sm:flex-row justify-center gap-6 pointer-events-auto">
+                <a href="#donate" class="bg-zen-vermilion hover:bg-red-800 text-zen-paper text-sm tracking-widest px-10 py-5 rounded-full font-bold transition-all transform hover:-translate-y-1 shadow-lg">
+                    點燃心燈 / 認養孩童
                 </a>
-                <a href="#programs" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-zen-green text-lg px-8 py-4 rounded-full font-bold transition-colors">
-                    探索核心計畫
+                <a href="#about" class="bg-transparent border border-zen-moss text-zen-moss hover:bg-zen-moss hover:text-zen-paper text-sm tracking-widest px-10 py-5 rounded-full font-medium transition-all">
+                    探尋菩提緣起
                 </a>
             </div>
         </div>
         
-        <div class="absolute bottom-0 w-full grid grid-cols-3 divide-x divide-white/20 border-t border-white/20 bg-black/20 backdrop-blur-md">
-            <div class="p-4 text-center">
-                <div class="text-2xl md:text-4xl font-bold text-zen-accent mb-1" id="stat-students">0</div>
-                <div class="text-sm md:text-base text-gray-300">受惠學童目標</div>
-            </div>
-            <div class="p-4 text-center">
-                <div class="text-2xl md:text-4xl font-bold text-zen-accent mb-1" id="stat-medical">0</div>
-                <div class="text-sm md:text-base text-gray-300">義診服務人次</div>
-            </div>
-            <div class="p-4 text-center">
-                <div class="text-2xl md:text-4xl font-bold text-zen-accent mb-1" id="stat-culture">0</div>
-                <div class="text-sm md:text-base text-gray-300">禪修推廣場次</div>
-            </div>
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center pointer-events-none z-10">
+            <span class="text-[10px] tracking-widest text-stone-400 uppercase mb-2">微移鼠標 激盪慈悲漣漪</span>
+            <div class="w-[1px] h-10 bg-gradient-to-b from-stone-400 to-transparent"></div>
         </div>
     </section>
 
-    <section id="about" class="py-20 bg-zen-bg px-4">
+    <section id="about" class="py-28 bg-zen-mist px-6 relative border-t border-stone-200">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-zen-green mb-4">關於協會</h2>
-                <div class="h-1 w-16 bg-zen-accent mx-auto mb-6"></div>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto section-intro">
-                    本區塊旨在建立組織厚度，將協會感人的創會緣起、核心理念，以及合法透明的組織架構呈現給大眾，藉此建立信任感，讓您了解我們「兩岸一家親，傳承愛與和平」的使命根基。
+            <div class="text-center mb-20">
+                <span class="text-zen-vermilion font-bold tracking-widest text-xs uppercase block mb-3">緣起與理念</span>
+                <h2 class="text-3xl md:text-4xl font-light text-zen-wood tracking-[0.3em] pl-[0.3em] mb-6">慈悲無界 ‧ 教育深耕</h2>
+                <div class="h-[1px] w-20 bg-zen-sand mx-auto mb-8"></div>
+                <p class="text-sm md:text-base text-stone-600 max-w-3xl mx-auto leading-relaxed tracking-wider">
+                    本篇章記錄了協會成立的清淨因緣。這並非一朝一夕之舉，而是行者在生命無常磨難後，於無疆之界所發起之大願。透過健全合規的組織治理，我們將這份悲心化為照亮幽暗的永恆之光。
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-2xl font-bold text-zen-green mb-6 flex items-center">
-                        <span class="text-3xl mr-3 text-zen-brown">🌱</span> 創會緣起
+            <div class="grid lg:grid-cols-12 gap-16 items-start">
+                <div class="lg:col-span-7 bg-zen-paper p-10 md:p-14 rounded-2xl border border-stone-200 shadow-sm relative">
+                    <div class="absolute top-0 right-12 transform -translate-y-1/2 bg-zen-sand text-zen-wood text-xs tracking-widest py-2 px-6 rounded-full font-medium">
+                        行者足跡
+                    </div>
+                    <h3 class="text-xl font-bold text-zen-moss mb-10 tracking-widest flex items-center">
+                        <span class="text-2xl mr-3 text-zen-vermilion">☸</span> 創會因緣
                     </h3>
-                    <ul class="space-y-6 relative border-l-2 border-zen-light ml-4 pl-6">
-                        <li class="relative">
-                            <div class="absolute -left-[31px] bg-zen-bg border-2 border-zen-light w-4 h-4 rounded-full mt-1"></div>
-                            <h4 class="font-bold text-lg text-zen-green">2024年 - 生命轉折</h4>
-                            <p class="text-gray-600 mt-2">在美歷經兩次重大車禍後結緣西祖禪，深刻體悟生命無常與珍貴。</p>
-                        </li>
-                        <li class="relative">
-                            <div class="absolute -left-[31px] bg-zen-bg border-2 border-zen-light w-4 h-4 rounded-full mt-1"></div>
-                            <h4 class="font-bold text-lg text-zen-green">2025年 - 皈依與感召</h4>
-                            <p class="text-gray-600 mt-2">首赴馬達加斯加皈依悟樂禪師，蒙開示「習禪做老實人」。體悟大師「慈悲沒有國界，教育就是最長遠的扶持」之精神，決心加入慈善弘法。</p>
-                        </li>
-                        <li class="relative">
-                            <div class="absolute -left-[31px] bg-zen-accent border-2 border-zen-accent w-4 h-4 rounded-full mt-1"></div>
-                            <h4 class="font-bold text-lg text-zen-green">創立與願景</h4>
-                            <p class="text-gray-600 mt-2">設立六祖慈善住宿學校，在非洲播下希望的種子。傳承愛與和平的使命，延伸至台灣並傳播世界。</p>
-                        </li>
-                    </ul>
+                    <div class="space-y-12 relative border-l border-stone-200 ml-3 pl-8">
+                        <div class="relative">
+                            <div class="absolute -left-[37px] bg-zen-paper border-2 border-zen-sand w-4 h-4 rounded-full mt-1.5"></div>
+                            <span class="text-xs text-stone-400 tracking-widest font-bold">2024年 ‧ 磨難與重生</span>
+                            <h4 class="font-bold text-base text-zen-wood mt-1 tracking-wider">大洋彼岸的生命試煉</h4>
+                            <p class="text-sm text-stone-600 mt-3 leading-relaxed tracking-wider">
+                                於美國歷經兩次生死車禍，深感色身無常，結緣西祖禪法，開啟探尋自性之門。
+                            </p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[37px] bg-zen-paper border-2 border-zen-sand w-4 h-4 rounded-full mt-1.5"></div>
+                            <span class="text-xs text-stone-400 tracking-widest font-bold">2025年 ‧ 皈依大願</span>
+                            <h4 class="font-bold text-base text-zen-wood mt-1 tracking-wider">馬島朝聖 ‧ 蒙師開示</h4>
+                            <p class="text-sm text-stone-600 mt-3 leading-relaxed tracking-wider">
+                                首赴非洲馬達加斯加，正式皈依上悟下樂禪師。蒙恩師開示「習禪做老實人」，深受「慈悲沒有國界，教育就是最長遠的扶持」之弘願感召，發心荷擔慈善如來家業。
+                            </p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[37px] bg-zen-vermilion border-2 border-zen-vermilion w-4 h-4 rounded-full mt-1.5"></div>
+                            <span class="text-xs text-zen-vermilion tracking-widest font-bold">當下與未來 ‧ 傳承大同</span>
+                            <h4 class="font-bold text-base text-zen-wood mt-1 tracking-wider">兩岸一家親 ‧ 愛傳世界</h4>
+                            <p class="text-sm text-stone-600 mt-3 leading-relaxed tracking-wider">
+                                於非洲設立六祖慈善住宿學校，播撒解脫與希望種子。攜手海峽兩岸，傳承和平大愛，由台灣延伸並澤被普天。
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="space-y-8">
-                    <div class="bg-zen-green text-white p-8 rounded-2xl shadow-md">
-                        <h3 class="text-2xl font-bold mb-4 flex items-center">
-                            <span class="text-3xl mr-3">🕊️</span> 核心理念
+                <div class="lg:col-span-5 space-y-10">
+                    <div class="bg-zen-moss text-zen-paper p-10 rounded-2xl shadow-md border border-stone-800">
+                        <h3 class="text-lg font-bold mb-6 tracking-widest flex items-center">
+                            <span class="text-xl mr-3 text-zen-sand">🕯️</span> 宗旨與家風
                         </h3>
-                        <p class="text-lg leading-relaxed text-gray-100">
-                            發揚中華禪宗文化，推動非洲教育與慈善工作。我們相信「心靈除貧」與「知識翻轉」必須並重。透過西祖三禪文化淨化人心，並以實質的教育資源改善偏鄉孩童的未來。
+                        <p class="text-sm leading-loose tracking-widest text-stone-300 font-light">
+                            以「淨化世人心靈，扶持貧匱幼學」為核心。我們深知心靈不除貧，身外皆幻影。透過推廣西祖三禪之文化提升社區道德；藉由教育與醫療援助，行大悲之行，令弱勢孩童有尊嚴地生活。
                         </p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                        <h3 class="text-xl font-bold text-zen-green mb-4 flex items-center">
-                            <span class="text-2xl mr-3 text-zen-brown">📜</span> 組織透明度
+                    <div class="bg-zen-paper p-10 rounded-2xl border border-stone-200">
+                        <h3 class="text-lg font-bold text-zen-wood mb-4 tracking-widest flex items-center">
+                            <span class="text-xl mr-3 text-zen-sand">⚖️</span> 誠信與清淨
                         </h3>
-                        <p class="text-gray-600 mb-4">
-                            社團法人台灣禪宗文化教育協會為合法立案之非營利組織。我們致力於財務公開透明，所有理監事名單、年度報告與捐款徵信皆定期公告，供大眾與主管機關檢視。
+                        <p class="text-sm text-stone-600 leading-relaxed tracking-wider mb-8">
+                            本協會受內政部及理監事會之嚴格監督，財務收支悉數登錄，專款專用。定期對社會大眾進行徵信公告，務求每一滴善款皆能化為利他淨業。
                         </p>
-                        <div class="flex gap-4">
-                            <button class="text-zen-accent font-medium hover:underline flex items-center" onclick="alert('此功能將下載最新年度報告書PDF')">
+                        <div class="flex gap-6">
+                            <button class="text-zen-vermilion text-xs tracking-widest font-bold hover:underline" onclick="showZenModal('年度報告下載說明', '年度工作報告及收支決算書PDF檔案正在整理中。我們堅持嚴格審計，待內政部備查後即開放下載。如需即時資訊，請致電秘書處。')">
                                 📄 下載年度報告
                             </button>
-                            <button class="text-zen-accent font-medium hover:underline flex items-center" onclick="alert('此功能將導向徵信查詢系統')">
+                            <button class="text-zen-vermilion text-xs tracking-widest font-bold hover:underline" onclick="showZenModal('捐款徵信系統', '本協會即將啟用線上徵信系統，屆時大眾可輸入收據號碼，即時核對所有海內外善款。感謝您對大眾資產的共同監督。')">
                                 🔍 徵信公告查詢
                             </button>
                         </div>
@@ -235,165 +277,160 @@
         </div>
     </section>
 
-    <section id="programs" class="py-20 bg-white px-4 border-t border-gray-100">
+    <section id="programs" class="py-28 bg-zen-paper px-6 border-t border-stone-200">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-zen-green mb-4">三大核心計畫</h2>
-                <div class="h-1 w-16 bg-zen-accent mx-auto mb-6"></div>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto section-intro">
-                    此區塊詳細解說協會目前的重點工作。透過互動式頁籤，您可以分別探索「禪文化推廣」、「非洲教育」以及「醫療援助」的具體內容、目標與執行現況，了解我們如何多管齊下實踐願景。
+            <div class="text-center mb-20">
+                <span class="text-zen-vermilion font-bold tracking-widest text-xs uppercase block mb-3">三昧行願</span>
+                <h2 class="text-3xl md:text-4xl font-light text-zen-wood tracking-[0.3em] pl-[0.3em] mb-6">核心弘化項目</h2>
+                <div class="h-[1px] w-20 bg-zen-sand mx-auto mb-8"></div>
+                <p class="text-sm md:text-base text-stone-600 max-w-3xl mx-auto leading-relaxed tracking-wider">
+                    萬行不離本心。本單元將為您展現「文化提升、知識扶持、生命照護」三大弘化項目。點擊下方頁籤，了解各項目在兩岸及非洲偏鄉的實踐進程，感受佛法如何落地為世間暖陽。
                 </p>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button onclick="switchTab('culture')" id="btn-culture" class="tab-btn active px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-zen-green transition-all">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="switchTab('culture')" id="btn-culture" class="tab-btn active px-8 py-4 rounded-full border border-stone-200 text-sm tracking-widest font-medium text-stone-600 hover:border-zen-moss">
                     🍵 禪宗文化發揚
                 </button>
-                <button onclick="switchTab('education')" id="btn-education" class="tab-btn px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-zen-green transition-all">
+                <button onclick="switchTab('education')" id="btn-education" class="tab-btn px-8 py-4 rounded-full border border-stone-200 text-sm tracking-widest font-medium text-stone-600 hover:border-zen-moss">
                     📚 非洲教育慈善
                 </button>
-                <button onclick="switchTab('medical')" id="btn-medical" class="tab-btn px-6 py-3 rounded-full border-2 border-gray-200 font-bold text-gray-600 hover:border-zen-green transition-all">
+                <button onclick="switchTab('medical')" id="btn-medical" class="tab-btn px-8 py-4 rounded-full border border-stone-200 text-sm tracking-widest font-medium text-stone-600 hover:border-zen-moss">
                     🏥 醫療援助計畫
                 </button>
             </div>
 
-            <div class="bg-zen-bg rounded-3xl p-8 md:p-12 shadow-sm min-h-[400px]">
+            <div class="bg-zen-mist rounded-3xl p-8 md:p-14 border border-stone-200 shadow-sm min-h-[450px]">
                 
                 <div id="content-culture" class="tab-content fade-in">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-3xl font-bold text-zen-green mb-4">西祖三禪文化推廣</h3>
-                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                                連接西祖寺的三禪文化，我們在台灣協辦各類文化活動，旨在交流社區的文化素養與道德觀念，實現「心靈除貧」。
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7">
+                            <h3 class="text-2xl font-light text-zen-wood tracking-widest mb-6">西祖三禪文化之美</h3>
+                            <p class="text-sm md:text-base text-stone-700 mb-8 leading-relaxed tracking-widest">
+                                汲取西祖寺三禪（禪樂、禪茶、禪修）之精髓，我們於台灣本地協辦弘化。藉由高雅的藝文活動洗滌塵勞，提升個人道德修養，落實心靈除貧，締造祥和社會。
                             </p>
-                            <ul class="space-y-4 mb-8">
-                                <li class="flex items-start">
-                                    <span class="text-zen-accent mr-3 mt-1 text-xl">🎵</span>
-                                    <div>
-                                        <h4 class="font-bold text-zen-green">禪樂弘法</h4>
-                                        <p class="text-sm text-gray-600">透過音聲梵唄，平靜心靈，傳遞祥和之氣。</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-zen-accent mr-3 mt-1 text-xl">🍵</span>
-                                    <div>
-                                        <h4 class="font-bold text-zen-green">禪茶品茗</h4>
-                                        <p class="text-sm text-gray-600">在茶道中體會專注與放下，培養生活中的禪意。</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-zen-accent mr-3 mt-1 text-xl">🧘</span>
-                                    <div>
-                                        <h4 class="font-bold text-zen-green">禪修班</h4>
-                                        <p class="text-sm text-gray-600">提供系統性的靜坐指導，幫助現代人舒緩壓力，找回本心。</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <button class="bg-zen-green text-white px-6 py-2 rounded-lg hover:bg-zen-light transition-colors" onclick="alert('顯示最新禪修課程行事曆與報名表單')">
-                                查看課程與報名
+                            <div class="grid sm:grid-cols-3 gap-6 mb-8">
+                                <div class="bg-zen-paper p-5 rounded-xl border border-stone-200">
+                                    <div class="text-2xl mb-2 text-zen-vermilion">📿</div>
+                                    <h4 class="font-bold text-sm text-zen-wood tracking-widest mb-1">禪樂弘法</h4>
+                                    <p class="text-xs text-stone-500 leading-relaxed">以寂靜之音宣流妙法，和諧心靈波動。</p>
+                                </div>
+                                <div class="bg-zen-paper p-5 rounded-xl border border-stone-200">
+                                    <div class="text-2xl mb-2 text-zen-vermilion">🍵</div>
+                                    <h4 class="font-bold text-sm text-zen-wood tracking-widest mb-1">禪茶一味</h4>
+                                    <p class="text-xs text-stone-500 leading-relaxed">於行茶啜飲之間，體悟當下，摒除雜念。</p>
+                                </div>
+                                <div class="bg-zen-paper p-5 rounded-xl border border-stone-200">
+                                    <div class="text-2xl mb-2 text-zen-vermilion">🧘‍♀️</div>
+                                    <h4 class="font-bold text-sm text-zen-wood tracking-widest mb-1">禪修靜慮</h4>
+                                    <p class="text-xs text-stone-500 leading-relaxed">指導止觀法門，讓現代人在呼吸中尋回真我。</p>
+                                </div>
+                            </div>
+                            <button class="bg-zen-moss text-zen-paper text-xs tracking-widest px-8 py-4 rounded-lg hover:bg-stone-800 transition-colors" onclick="showZenModal('禪修活動報名', '目前的「一日茶禪」及「靜夜止觀」課程已在全台巡迴籌備中。最新課表與名額登記系統將在第二季度正式發布，敬請保持關注。')">
+                                參與體驗 / 預約報名
                             </button>
                         </div>
-                        <div class="bg-white rounded-2xl p-6 h-full flex flex-col justify-center items-center text-center border border-gray-200">
-                            <div class="text-8xl mb-4">🧘‍♀️</div>
-                            <h4 class="text-xl font-bold text-zen-brown mb-2">近期活動預告</h4>
-                            <p class="text-gray-600">台北週末靜心一日禪<br>報名開放中，名額有限。</p>
+                        <div class="lg:col-span-5 bg-zen-paper rounded-2xl p-8 border border-stone-200 flex flex-col justify-center items-center text-center">
+                            <div class="text-6xl text-zen-sand mb-6">🌸</div>
+                            <h4 class="text-lg font-bold text-zen-wood tracking-widest mb-3">松風禪茶會預告</h4>
+                            <p class="text-sm text-stone-600 leading-relaxed">
+                                台北靜思庵 ‧ 週末清音<br>
+                                茶席席位有限，優先開放予協會會員。
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <div id="content-education" class="tab-content hidden fade-in">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-3xl font-bold text-zen-green mb-4">六祖寄宿學校</h3>
-                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                                在馬達加斯加，教育是脫離貧困的最有效途徑。我們持續擴建六祖寄宿學校的師資、校舍與圖書館，提供從基礎識字到音樂藝術技能培訓的一條龍教育服務。
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7">
+                            <h3 class="text-2xl font-light text-zen-wood tracking-widest mb-6">非洲六祖慈善住宿學校</h3>
+                            <p class="text-sm md:text-base text-stone-700 mb-8 leading-relaxed tracking-widest">
+                                在貧困交迫的馬達加斯加，教育是斬斷貧窮世襲的唯一利器。我們全力支持六祖住宿學校的興建，不僅給予遮風避雨的屋簷，更為他們提供系統化教育與技能培養。
                             </p>
-                            <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6">
-                                <h4 class="font-bold text-zen-brown mb-3">計畫推動重點：</h4>
+                            <div class="bg-zen-paper p-8 rounded-xl border border-stone-200 mb-8">
+                                <h4 class="font-bold text-sm text-zen-wood mb-4 tracking-widest">建設進程與發展方向：</h4>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <div class="flex flex-col items-center p-3 bg-zen-bg rounded-lg">
-                                        <span class="text-2xl mb-1">🏫</span>
-                                        <span class="text-sm font-bold text-center">校舍與圖書館擴建</span>
+                                    <div class="flex items-center space-x-3 p-3 bg-zen-mist rounded-lg">
+                                        <span class="text-2xl">🏫</span>
+                                        <span class="text-xs font-bold text-stone-700">安全宿舍與圖書館擴建</span>
                                     </div>
-                                    <div class="flex flex-col items-center p-3 bg-zen-bg rounded-lg">
-                                        <span class="text-2xl mb-1">👩‍🏫</span>
-                                        <span class="text-sm font-bold text-center">優質師資培育</span>
+                                    <div class="flex items-center space-x-3 p-3 bg-zen-mist rounded-lg">
+                                        <span class="text-2xl">👩‍🏫</span>
+                                        <span class="text-xs font-bold text-stone-700">聘請馬島當地師資培訓</span>
                                     </div>
-                                    <div class="flex flex-col items-center p-3 bg-zen-bg rounded-lg">
-                                        <span class="text-2xl mb-1">🎨</span>
-                                        <span class="text-sm font-bold text-center">音樂藝術技能培訓</span>
+                                    <div class="flex items-center space-x-3 p-3 bg-zen-mist rounded-lg">
+                                        <span class="text-2xl">🎨</span>
+                                        <span class="text-xs font-bold text-stone-700">藝術與音樂職能啟蒙</span>
                                     </div>
-                                    <div class="flex flex-col items-center p-3 bg-zen-bg rounded-lg">
-                                        <span class="text-2xl mb-1">🍚</span>
-                                        <span class="text-sm font-bold text-center">學童營養膳食供應</span>
+                                    <div class="flex items-center space-x-3 p-3 bg-zen-mist rounded-lg">
+                                        <span class="text-2xl">🍚</span>
+                                        <span class="text-xs font-bold text-stone-700">每日足額熱食營養配給</span>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#donate" class="inline-block bg-zen-accent text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors">
-                                參與孩童認養計畫
+                            <a href="#donate" class="inline-block bg-zen-vermilion text-zen-paper text-xs tracking-widest px-8 py-4 rounded-lg hover:bg-red-800 transition-colors">
+                                認養非洲孩子生命未來
                             </a>
                         </div>
-                        <div class="bg-zen-brown text-white rounded-2xl p-8 h-full flex flex-col justify-center">
-                            <h4 class="text-2xl font-bold mb-4">教育，看見未來的光</h4>
-                            <p class="text-gray-200 mb-6 italic">「在這裡，孩子們不僅學會讀寫，更透過音樂找到了自信與笑容。您的每一分支持，都在為非洲偏鄉構築堅實的希望。」</p>
-                            <div class="text-right">
-                                <span class="text-4xl font-bold text-zen-accent">500+</span>
-                                <span class="text-sm">預計受惠學童</span>
+                        <div class="lg:col-span-5 bg-zen-wood text-zen-paper rounded-2xl p-8 border border-stone-800 flex flex-col justify-between h-full min-h-[300px]">
+                            <div>
+                                <h4 class="text-lg font-bold text-zen-sand mb-4 tracking-widest">長遠之扶持</h4>
+                                <p class="text-sm text-stone-300 leading-loose font-light italic">
+                                    「這裡的孩子擁有一雙能穿透苦難、看見天堂的清淨眼眸。您的關懷，將為這雙眼睛點亮通往知識與覺悟的道路。」
+                                </p>
+                            </div>
+                            <div class="text-right border-t border-stone-800 pt-4 mt-6">
+                                <span class="text-4xl font-light text-zen-sand">500+</span>
+                                <span class="text-xs text-stone-400 block tracking-widest">第一期預計受惠學童人數</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div id="content-medical" class="tab-content hidden fade-in">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-3xl font-bold text-zen-green mb-4">馬達加斯加行動醫療</h3>
-                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                                結合台灣豐富的宗教醫療體系與義診經驗，我們計畫在馬達加斯加推動行動醫療服務，將基礎醫療資源送入最缺乏的偏鄉地區。
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7">
+                            <h3 class="text-2xl font-light text-zen-wood tracking-widest mb-6">慈悲藥師 ‧ 行動義診</h3>
+                            <p class="text-sm md:text-base text-stone-700 mb-8 leading-relaxed tracking-widest">
+                                結合兩岸、美國等跨地域醫療資源（如佛教義診團體、基督教愛心診所），我們將醫療設備與常備藥物送至馬島交通匱乏的偏鄉深處，拯救生命於微時。
                             </p>
-                            <ul class="space-y-4 mb-8">
-                                <li class="flex items-start">
-                                    <div class="bg-white p-2 rounded-full border border-gray-200 mr-4">🩺</div>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start">
+                                    <div class="bg-zen-paper p-3 rounded-full border border-stone-200 mr-4 text-xs">🌿</div>
                                     <div>
-                                        <h4 class="font-bold text-zen-green">改善營養與衛生</h4>
-                                        <p class="text-sm text-gray-600">針對偏鄉兒童常見的營養不良與寄生蟲問題進行投藥與衛教。</p>
+                                        <h4 class="font-bold text-sm text-zen-wood tracking-widest">無國界兒童營養補給</h4>
+                                        <p class="text-xs text-stone-500 mt-1">針對馬島學童進行急需的微量元素與寄生蟲投藥，奠定健康體魄。</p>
                                     </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <div class="bg-white p-2 rounded-full border border-gray-200 mr-4">🚑</div>
-                                    <div>
-                                        <h4 class="font-bold text-zen-green">建立行動巡迴機制</h4>
-                                        <p class="text-sm text-gray-600">突破交通不便，定期巡迴偏遠村落提供基礎診療。</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start">
-                                    <div class="bg-white p-2 rounded-full border border-gray-200 mr-4">🤝</div>
-                                    <div>
-                                        <h4 class="font-bold text-zen-green">跨界醫療合作</h4>
-                                        <p class="text-sm text-gray-600">招募台灣專業醫療人員與志工，組成跨國醫療義診團。</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <button class="bg-zen-green text-white px-6 py-2 rounded-lg hover:bg-zen-light transition-colors" onclick="alert('將開啟醫療志工招募說明與報名系統')">
-                                加入醫療義診志工
-                            </button>
-                        </div>
-                        <div class="bg-white rounded-2xl p-6 h-full flex flex-col justify-center border border-gray-200">
-                            <h4 class="text-xl font-bold text-zen-brown mb-4 border-b pb-2">急需資源</h4>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="font-medium text-gray-700">行動診療車輛</span>
-                                    <span class="text-zen-accent font-bold">籌募中</span>
                                 </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="font-medium text-gray-700">基礎常備藥品</span>
-                                    <span class="text-zen-accent font-bold">持續需求</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="font-medium text-gray-700">兒科/家醫科醫師志工</span>
-                                    <span class="text-zen-green font-bold">熱烈招募</span>
+                                <div class="flex items-start">
+                                    <div class="bg-zen-paper p-3 rounded-full border border-stone-200 mr-4 text-xs">🩺</div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-zen-wood tracking-widest">巡迴偏鄉與衛教</h4>
+                                        <p class="text-xs text-stone-500 mt-1">越過乾涸的河流，設立基礎流動診所，加強水源淨化與防病宣導。</p>
+                                    </div>
                                 </div>
                             </div>
+                            <button class="bg-zen-moss text-zen-paper text-xs tracking-widest px-8 py-4 rounded-lg hover:bg-stone-800 transition-colors" onclick="showZenModal('志工醫師招募', '凡持有中西醫、小兒科、牙科專業執照，且具備跨國人道關懷熱忱之行者，皆歡迎向本會登記。我們將於年度義診出團前通知。')">
+                                加入醫療志工團隊
+                            </button>
+                        </div>
+                        <div class="lg:col-span-5 bg-zen-paper rounded-2xl p-8 border border-stone-200">
+                            <h4 class="text-md font-bold text-zen-wood mb-4 tracking-widest border-b border-stone-200 pb-2">急需藥資清單</h4>
+                            <ul class="space-y-3 text-xs">
+                                <li class="flex justify-between">
+                                    <span class="text-stone-600">兒科抗寄生蟲藥劑</span>
+                                    <span class="text-zen-vermilion font-bold">極度短缺</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-stone-600">無菌常規傷口敷料</span>
+                                    <span class="text-zen-vermilion font-bold">持續籌募</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-stone-600">偏鄉巡迴急救箱與耗材</span>
+                                    <span class="text-stone-500">預備中</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -402,29 +439,30 @@
         </div>
     </section>
 
-    <section id="impact" class="py-20 bg-zen-bg px-4">
+    <section id="impact" class="py-28 bg-zen-mist px-6 relative border-t border-stone-200">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-zen-green mb-4">數據與成效預估</h2>
-                <div class="h-1 w-16 bg-zen-accent mx-auto mb-6"></div>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto section-intro">
-                    本區塊透過資料視覺化圖表，清晰呈現協會對於未來專案的目標設定與善款運用規劃。這些數據不僅是我們的執行藍圖，更是向大眾展現責信度與公開透明的重要依據，讓您的愛心流向一目了然。
+            <div class="text-center mb-20">
+                <span class="text-zen-vermilion font-bold tracking-widest text-xs uppercase block mb-3">因緣願力</span>
+                <h2 class="text-3xl md:text-4xl font-light text-zen-wood tracking-[0.3em] pl-[0.3em] mb-6">成效實證與透明度</h2>
+                <div class="h-[1px] w-20 bg-zen-sand mx-auto mb-8"></div>
+                <p class="text-sm md:text-base text-stone-600 max-w-3xl mx-auto leading-relaxed tracking-wider">
+                    萬法唯心造，亦需腳踏實地。為落實公信，本協會將各項計畫的三年期成長願景與大眾資產分配預算進行可視化。這既是工作人員與理監事的核心目標，亦向所有支持者公開澄澈心跡。
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-16">
                 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
-                    <h3 class="text-xl font-bold text-zen-green mb-2 text-center">三年期目標受惠人次預估</h3>
-                    <p class="text-sm text-gray-500 text-center mb-6">涵蓋教育、醫療與文化推廣三大面向</p>
+                <div class="bg-zen-paper p-8 rounded-2xl border border-stone-200 flex flex-col">
+                    <h3 class="text-lg font-bold text-zen-wood mb-2 text-center tracking-widest">三年期目標受惠人次預估</h3>
+                    <p class="text-xs text-stone-400 text-center mb-6">教育、義診與心靈弘法三大維度</p>
                     <div class="chart-container flex-grow">
                         <canvas id="impactBarChart"></canvas>
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
-                    <h3 class="text-xl font-bold text-zen-green mb-2 text-center">專案善款預期運用比例</h3>
-                    <p class="text-sm text-gray-500 text-center mb-6">確保每一分資源發揮最大效益</p>
+                <div class="bg-zen-paper p-8 rounded-2xl border border-stone-200 flex flex-col">
+                    <h3 class="text-lg font-bold text-zen-wood mb-2 text-center tracking-widest">專案善款預期運用比例</h3>
+                    <p class="text-xs text-stone-400 text-center mb-6">專款專用 ‧ 將大眾資產發揮極致</p>
                     <div class="chart-container flex-grow">
                         <canvas id="allocationPieChart"></canvas>
                     </div>
@@ -434,99 +472,115 @@
         </div>
     </section>
 
-    <section id="donate" class="py-20 bg-white px-4 border-t border-gray-100">
+    <section id="donate" class="py-28 bg-zen-paper px-6 border-t border-stone-200">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-zen-accent mb-4">參與行動，傳遞慈悲</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto section-intro">
-                    行動是改變的開始。在此區塊，您可以透過互動式滑桿了解不同捐款金額能創造的實質改變，並選擇最適合您的支持方式。無論是一次性捐助或長期認養，都能成為跨越國界的重要橋樑。
+            <div class="text-center mb-20">
+                <span class="text-zen-vermilion font-bold tracking-widest text-xs uppercase block mb-3">共襄善舉</span>
+                <h2 class="text-3xl md:text-4xl font-light text-zen-wood tracking-[0.3em] pl-[0.3em] mb-6">一盞心燈 ‧ 照亮前路</h2>
+                <div class="h-[1px] w-20 bg-zen-sand mx-auto mb-8"></div>
+                <p class="text-sm md:text-base text-stone-600 max-w-2xl mx-auto leading-relaxed tracking-wider">
+                    您的每一滴慈悲水，都是非洲偏鄉最珍貴的甘露。使用下方的善心計算器，感受不同程度的發心如何在地球的另一端轉化為溫暖的改變。
                 </p>
             </div>
 
-            <div class="bg-zen-bg rounded-3xl p-8 md:p-12 shadow-md">
-                <div class="mb-10 text-center">
-                    <h3 class="text-2xl font-bold text-zen-green mb-4">看見您的影響力</h3>
-                    <p class="text-gray-600 mb-8">拖曳滑桿，了解您的捐款能為六祖學校的孩子們帶來什麼幫助：</p>
+            <div class="bg-zen-mist rounded-3xl p-8 md:p-14 border border-stone-200 shadow-md">
+                <div class="mb-12 text-center">
+                    <h3 class="text-xl font-bold text-zen-wood mb-4 tracking-widest">愛心功德計算器</h3>
+                    <p class="text-xs text-stone-500 mb-8 tracking-wider">請滑動下方滑桿，觀看您的發心力量：</p>
                     
-                    <div class="max-w-2xl mx-auto">
-                        <div class="flex justify-between text-zen-brown font-bold mb-2">
+                    <div class="max-w-xl mx-auto">
+                        <div class="flex justify-between text-stone-600 font-bold mb-4 text-sm">
                             <span>NT$ 500</span>
-                            <span class="text-2xl text-zen-accent" id="sliderValueDisplay">NT$ 1,500</span>
+                            <span class="text-2xl text-zen-vermilion" id="sliderValueDisplay">NT$ 1,500</span>
                             <span>NT$ 10,000</span>
                         </div>
-                        <input type="range" min="500" max="10000" step="500" value="1500" class="w-full mb-6" id="donationSlider">
+                        <input type="range" min="500" max="10000" step="500" value="1,500" class="w-full mb-8" id="donationSlider">
                         
-                        <div class="bg-white p-6 rounded-xl border border-zen-light shadow-sm min-h-[120px] flex items-center justify-center">
-                            <p id="impactMessage" class="text-lg font-medium text-zen-green text-center">
-                                足以提供 <span class="text-zen-accent font-bold text-xl">1位學童</span> 一個月的營養膳食與基礎文具。
+                        <div class="bg-zen-paper p-8 rounded-xl border border-stone-200 shadow-inner min-h-[120px] flex items-center justify-center">
+                            <p id="impactMessage" class="text-sm md:text-base text-zen-moss text-center leading-loose tracking-widest font-medium">
+                                足以提供 <span class="text-zen-vermilion font-bold text-xl">1位學童</span> 一個月的營養膳食與基礎文具。
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-6">
-                    <button class="bg-zen-accent hover:bg-orange-700 text-white p-6 rounded-2xl transition-all transform hover:-translate-y-1 shadow-md flex flex-col items-center justify-center text-center group" onclick="alert('進入線上信用卡捐款與定期定額認養系統')">
-                        <span class="text-4xl mb-3 group-hover:scale-110 transition-transform">💳</span>
-                        <h4 class="text-xl font-bold mb-2">線上捐款 / 定期認養</h4>
-                        <p class="text-sm text-gray-100">支援信用卡、ATM、超商代碼<br>提供一對一或專案認養</p>
+                    <button class="bg-zen-vermilion hover:bg-red-800 text-zen-paper p-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-md flex flex-col items-center justify-center text-center group" onclick="showZenModal('線上刷卡與定期捐贈', '我們已安全串接符合PCI國際標準的金流系統。認養或定期捐贈非洲孩童專案將於下週正式上線，您將可以隨時於系統登錄，讀取您所認養孩子的成長手札與家書。')">
+                        <span class="text-3xl mb-4">💳</span>
+                        <h4 class="text-lg font-bold mb-2 tracking-widest">線上捐款 / 定期認養</h4>
+                        <p class="text-xs text-stone-300 leading-relaxed">提供單筆或每月定期信用卡捐款<br>支援海內外多種便利支付通道</p>
                     </button>
                     
-                    <button class="bg-white border-2 border-zen-brown hover:border-zen-green text-zen-brown hover:text-zen-green p-6 rounded-2xl transition-all transform hover:-translate-y-1 shadow-sm flex flex-col items-center justify-center text-center" onclick="alert('顯示郵政劃撥與銀行匯款帳號資訊')">
-                        <span class="text-4xl mb-3">🏦</span>
-                        <h4 class="text-xl font-bold mb-2">銀行匯款 / 郵政劃撥</h4>
-                        <p class="text-sm text-gray-500">適合大額捐款或企業贊助<br>包含海外美金帳戶資訊</p>
+                    <button class="bg-zen-paper border border-stone-300 hover:border-zen-moss text-zen-wood p-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-sm flex flex-col items-center justify-center text-center group" onclick="showZenModal('臨櫃轉帳與劃撥資訊', '銀行代號：XXX 帳號：XXXX-XXXX-XXXX-XX<br>戶名：社團法人台灣禪宗文化教育協會<br>郵政劃撥帳號：XXXXXX<br><br>※ 完成轉帳後，請保留單據、點擊官網聯絡我們填寫表單或致電，以便開立合法抵稅收據。')">
+                        <span class="text-3xl mb-4">🏦</span>
+                        <h4 class="text-lg font-bold mb-2 tracking-widest">銀行匯款 / 郵政劃撥</h4>
+                        <p class="text-xs text-stone-500 leading-relaxed">提供企業或海外大額外幣匯款<br>附帶節稅專用捐贈收據</p>
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-zen-green text-gray-300 py-12 px-4 border-t-4 border-zen-accent">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+    <footer class="bg-zen-wood text-stone-400 py-16 px-6 border-t-2 border-zen-sand">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
             <div>
-                <div class="flex items-center mb-4">
-                    <span class="text-2xl mr-2">🍵</span>
-                    <span class="font-bold text-xl text-white">TZCEA</span>
+                <div class="flex items-center mb-6">
+                    <span class="text-3xl mr-3 text-zen-sand">☯</span>
+                    <span class="font-bold text-lg text-zen-paper tracking-widest">台灣禪宗文化教育協會</span>
                 </div>
-                <p class="text-sm mb-4 max-w-xs">
-                    社團法人台灣禪宗文化教育協會<br>
-                    Taiwan Zen Culture and Education Association
+                <p class="text-xs mb-4 leading-relaxed max-w-xs">
+                    本協會為依法立案之社團法人組織。<br>
+                    旨在弘揚正信禪法、推動非洲偏鄉宿校教育、健全醫療巡迴。
                 </p>
-                <p class="text-sm italic">發揚西祖三禪文化、推動非洲教育與慈善</p>
+                <p class="text-xs italic text-stone-500">── 願消三障諸煩惱，願得智慧真明了 ──</p>
             </div>
             
             <div>
-                <h4 class="text-white font-bold mb-4">快速連結</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#about" class="hover:text-zen-accent transition-colors">關於協會與理監事會</a></li>
-                    <li><a href="#programs" class="hover:text-zen-accent transition-colors">最新消息與活動公告</a></li>
-                    <li><a href="#impact" class="hover:text-zen-accent transition-colors">年度財務報告與徵信</a></li>
-                    <li><a href="#donate" class="hover:text-zen-accent transition-colors text-white font-medium">孩童認養專區</a></li>
+                <h4 class="text-zen-paper font-bold tracking-widest text-sm mb-6">快速連結</h4>
+                <ul class="space-y-3 text-xs">
+                    <li><a href="#about" class="hover:text-zen-sand transition-colors">關於協會與緣起</a></li>
+                    <li><a href="#programs" class="hover:text-zen-sand transition-colors">三昧行願弘化</a></li>
+                    <li><a href="#impact" class="hover:text-zen-sand transition-colors">成效預測與責信</a></li>
+                    <li><a href="#donate" class="hover:text-zen-sand transition-colors text-zen-sand font-bold">支持我們</a></li>
                 </ul>
             </div>
             
             <div>
-                <h4 class="text-white font-bold mb-4">聯絡我們</h4>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-start">
-                        <span class="mr-2">📧</span> service@tzcea.org.tw
+                <h4 class="text-zen-paper font-bold tracking-widest text-sm mb-6">聯絡我們</h4>
+                <ul class="space-y-3 text-xs">
+                    <li class="flex items-center">
+                        <span class="mr-3">📧</span> service@tzcea.org.tw
                     </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">📞</span> +886-2-XXXX-XXXX
+                    <li class="flex items-center">
+                        <span class="mr-3">📞</span> +886-2-XXXX-XXXX
                     </li>
-                    <li class="flex items-start">
-                        <span class="mr-2">🏢</span> 台灣 (協會立案登記地址)
+                    <li class="flex items-center">
+                        <span class="mr-3">🏢</span> 台灣 (依法立案登記會址)
                     </li>
                 </ul>
-                <button class="mt-4 border border-gray-400 text-gray-300 px-4 py-2 rounded text-sm hover:bg-white hover:text-zen-green transition-colors" onclick="alert('開啟線上諮詢表單')">
+                <button class="mt-6 border border-stone-600 text-stone-400 px-6 py-2.5 rounded text-xs tracking-widest hover:bg-zen-paper hover:text-zen-wood transition-colors" onclick="showZenModal('聯絡表單諮詢', '任何關於理監事會議、文化交流、義診出團或認養孩童流程的諮詢，皆可透過電子信箱、或於週一至週五 09:00-17:00 致電本會秘書處，我們將竭誠為您解答。')">
                     填寫線上諮詢表單
                 </button>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-600 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-stone-800 text-center text-[10px] text-stone-600 tracking-wider">
             <p>&copy; 2026 社團法人台灣禪宗文化教育協會 TZCEA. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Custom Zen Modal Alert -->
+    <div id="zenModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6 hidden">
+        <div class="bg-zen-paper rounded-2xl border-t-4 border-zen-vermilion p-8 max-w-md w-full shadow-2xl relative fade-in">
+            <div class="text-3xl text-zen-sand mb-4 text-center">⛩️</div>
+            <h3 id="zenModalTitle" class="text-lg font-bold text-zen-wood text-center tracking-widest mb-4">標題</h3>
+            <div id="zenModalBody" class="text-sm text-stone-600 leading-loose tracking-wide mb-8 text-center max-h-[300px] overflow-y-auto">內容</div>
+            <div class="flex justify-center">
+                <button onclick="closeZenModal()" class="bg-zen-moss hover:bg-stone-800 text-zen-paper px-8 py-3 rounded-full text-xs tracking-widest font-bold transition-all shadow-md">
+                    觀照自性 ‧ 關閉
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Data Storage
@@ -535,10 +589,10 @@
         };
 
         const impactData = {
-            1500: { message: "足以提供 <span class='text-zen-accent font-bold text-xl'>1位學童</span> 一個月的營養膳食與基礎文具。", students: 1 },
-            3000: { message: "能協助更新 <span class='text-zen-accent font-bold text-xl'>1間教室</span> 的基礎教學設備或圖書。", students: 2 },
-            5000: { message: "可支持 <span class='text-zen-accent font-bold text-xl'>1次偏鄉醫療巡迴</span> 所需的基本常備藥物。", students: 4 },
-            10000: { message: "能完整認養 <span class='text-zen-accent font-bold text-xl'>1位偏鄉學童</span> 一整年的教育與生活所需！", students: 10 }
+            1500: { message: "足以提供 <span class='text-zen-vermilion font-bold text-xl'>1位學童</span> 一個月的營養膳食與基礎文具。" },
+            3000: { message: "能協助更新六祖學校 <span class='text-zen-vermilion font-bold text-xl'>1間教室</span> 的基礎教學設備或圖書。" },
+            5000: { message: "可支持巡迴診療車 <span class='text-zen-vermilion font-bold text-xl'>1次偏鄉巡迴</span> 所需的基本常備藥物物資。" },
+            10000: { message: "能完整認養 <span class='text-zen-vermilion font-bold text-xl'>1位偏鄉學童</span> 一整年的教育與食宿生活所需！" }
         };
 
         // DOM Elements
@@ -550,12 +604,23 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        // Functional Navigation (Sticky active state & Mobile Menu)
+        // Modal triggers
+        function showZenModal(title, text) {
+            document.getElementById('zenModalTitle').innerHTML = title;
+            document.getElementById('zenModalBody').innerHTML = text;
+            document.getElementById('zenModal').classList.remove('hidden');
+        }
+
+        function closeZenModal() {
+            document.getElementById('zenModal').classList.add('hidden');
+        }
+
+        // Functional Navigation (Active link highlighting on scroll)
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 100) {
+                if (scrollY >= sectionTop - 150) {
                     current = section.getAttribute('id');
                 }
             });
@@ -578,27 +643,27 @@
             });
         });
 
-        // Tab Switching Logic
+        // Tab Switching Logic (Programs)
         function switchTab(tabId) {
             state.currentTab = tabId;
             
-            // Reset buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-zen-green', 'text-white', 'border-zen-green');
-                btn.classList.add('text-gray-600', 'border-gray-200');
+                btn.classList.remove('active');
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = '#5C6F5E';
+                btn.style.borderColor = '#C5B49E';
             });
             
-            // Set active button
             const activeBtn = document.getElementById(`btn-${tabId}`);
-            activeBtn.classList.remove('text-gray-600', 'border-gray-200');
-            activeBtn.classList.add('active', 'bg-zen-green', 'text-white', 'border-zen-green');
+            activeBtn.classList.add('active');
+            activeBtn.style.backgroundColor = '#3B4D43';
+            activeBtn.style.color = '#F5F2EB';
+            activeBtn.style.borderColor = '#3B4D43';
 
-            // Hide all content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
             });
 
-            // Show selected content
             document.getElementById(`content-${tabId}`).classList.remove('hidden');
         }
 
@@ -613,7 +678,7 @@
             else if (val >= 3000) messageObj = impactData[3000];
             else if (val >= 1500) messageObj = impactData[1500];
             else {
-                messageObj = { message: `積少成多，您的愛心將匯入教育基金，幫助校舍維護與膳食採購。` };
+                messageObj = { message: `聚沙成塔。您的善心將匯入教育基金，主要用於校園防蚊設施及營養膳食改善。` };
             }
             
             impactMessage.innerHTML = messageObj.message;
@@ -621,39 +686,109 @@
 
         slider.addEventListener('input', updateCalculator);
 
-        // Simple counters animation
-        function animateValue(id, start, end, duration) {
-            if (start === end) return;
-            const range = end - start;
-            let current = start;
-            const increment = end > start ? 1 : -1;
-            const stepTime = Math.abs(Math.floor(duration / range));
-            const obj = document.getElementById(id);
-            const timer = setInterval(function() {
-                current += increment;
-                obj.innerHTML = current + (id === 'stat-students' ? '+' : '');
-                if (current == end) {
-                    clearInterval(timer);
+        // Zen Interactive Water Ripple Background on Hero Section Canvas
+        const canvas = document.getElementById('rippleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = canvas.offsetWidth;
+        let height = canvas.height = canvas.offsetHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = canvas.offsetWidth;
+            height = canvas.height = canvas.offsetHeight;
+        });
+
+        let ripples = [];
+
+        class Ripple {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 0;
+                this.maxRadius = Math.max(width, height) * 0.4;
+                this.alpha = 0.4;
+                this.speed = 1.5;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(178, 93, 66, ${this.alpha})`; // Vermilion
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // Inner secondary ring
+                if (this.radius > 40) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius - 40, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(92, 111, 94, ${this.alpha * 0.5})`; // Bamboo
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
                 }
-            }, stepTime);
+
+                this.radius += this.speed;
+                this.alpha -= 0.001 * this.speed;
+            }
+
+            isDead() {
+                return this.alpha <= 0 || this.radius >= this.maxRadius;
+            }
         }
 
-        // Initialize Charts and Counters on Load
-        window.onload = () => {
-            // Hero Counters
-            setTimeout(() => {
-                animateValue("stat-students", 0, 500, 2000);
-                animateValue("stat-medical", 0, 1200, 2500);
-                animateValue("stat-culture", 0, 30, 1500);
-            }, 500);
+        const hero = document.getElementById('home');
+        hero.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Limit density of ripples
+            if (ripples.length < 15 && Math.random() < 0.04) {
+                ripples.push(new Ripple(x, y));
+            }
+        });
 
-            // Chart Colors matching the palette
+        // Click adds strong concentric waves
+        hero.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            ripples.push(new Ripple(e.clientX - rect.left, e.clientY - rect.top));
+        });
+
+        // Constant faint drip in center to ensure dynamic visual
+        setInterval(() => {
+            if (document.visibilityState === 'visible' && ripples.length < 5) {
+                ripples.push(new Ripple(width / 2 + (Math.random() - 0.5) * 100, height / 2 + (Math.random() - 0.5) * 100));
+            }
+        }, 3000);
+
+        function animateRipples() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw a subtle organic stone outline or Zen sand lines
+            ctx.strokeStyle = '#EAE5D9';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 4; i++) {
+                ctx.beginPath();
+                ctx.arc(width * 0.2, height * 0.4, i * 60, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            ripples = ripples.filter(ripple => {
+                ripple.draw();
+                return !ripple.isDead();
+            });
+
+            requestAnimationFrame(animateRipples);
+        }
+        animateRipples();
+
+        // Initialize Charts on Load
+        window.onload = () => {
             const colors = {
-                green: '#2C4C3B',
-                lightGreen: '#4A7C59',
+                vermilion: '#B25D42',
+                bamboo: '#5C6F5E',
                 brown: '#8C7A6B',
-                accent: '#D97757',
-                gray: '#E2E8F0'
+                moss: '#3B4D43',
+                gray: '#E2E8F0',
+                sand: '#C5B49E'
             };
 
             // Setup Chart 1: Bar Chart (Expected Impact)
@@ -664,22 +799,22 @@
                     labels: ['2026 預估', '2027 目標', '2028 願景'],
                     datasets: [
                         {
-                            label: '教育扶助(人)',
+                            label: '教育扶助(人次)',
                             data: [300, 500, 800],
-                            backgroundColor: colors.accent,
-                            borderRadius: 4
+                            backgroundColor: colors.vermilion,
+                            borderRadius: 6
                         },
                         {
-                            label: '義診服務(人次)',
+                            label: '流動診所醫療服務(人次)',
                             data: [500, 1200, 2000],
-                            backgroundColor: colors.lightGreen,
-                            borderRadius: 4
+                            backgroundColor: colors.bamboo,
+                            borderRadius: 6
                         },
                         {
-                            label: '禪修推廣(參與人次)',
+                            label: '茶禪文化推廣(預計參與者)',
                             data: [1000, 1500, 2500],
                             backgroundColor: colors.brown,
-                            borderRadius: 4
+                            borderRadius: 6
                         }
                     ]
                 },
@@ -689,17 +824,18 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            grid: { color: colors.gray }
+                            grid: { color: colors.gray },
+                            ticks: { font: { family: "'Noto Sans TC', sans-serif" } }
                         },
                         x: {
-                            grid: { display: false }
+                            grid: { display: false },
+                            ticks: { font: { family: "'Noto Sans TC', sans-serif" } }
                         }
                     },
                     plugins: {
-                        legend: { position: 'bottom' },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: "'Noto Sans TC', sans-serif", size: 11 } }
                         }
                     }
                 }
@@ -711,40 +847,33 @@
                 type: 'doughnut',
                 data: {
                     labels: [
-                        '六祖學校教育與校舍基金', 
-                        '行動醫療與義診基金', 
-                        '禪宗文化推廣活動', 
-                        '行政營運與急難救助'
+                        '六祖住宿學校興建與營運 (55%)', 
+                        '行動巡迴醫療與急救耗材 (25%)', 
+                        '台灣茶禪推廣與淨化心靈 (10%)', 
+                        '必備行政維運與監控預算 (10%)'
                     ],
                     datasets: [{
                         data: [55, 25, 10, 10],
                         backgroundColor: [
-                            colors.accent,     // Education gets the accent color (hope/future)
-                            colors.lightGreen, // Medical
-                            colors.brown,      // Culture
-                            colors.green       // Admin
+                            colors.vermilion,
+                            colors.bamboo,
+                            colors.sand,
+                            colors.moss
                         ],
                         borderWidth: 2,
-                        borderColor: '#ffffff'
+                        borderColor: '#F5F2EB'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '65%',
+                    cutout: '70%',
                     plugins: {
                         legend: {
                             position: 'bottom',
                             labels: {
                                 padding: 20,
-                                font: { family: "'Noto Sans TC', sans-serif" }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ' ' + context.label + ': ' + context.parsed + '%';
-                                }
+                                font: { family: "'Noto Sans TC', sans-serif", size: 11 }
                             }
                         }
                     }
